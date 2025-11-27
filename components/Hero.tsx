@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const scrollToManifesto = () => {
@@ -49,7 +48,6 @@ const Hero: React.FC = () => {
               className="group inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-brand-600 hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-1"
             >
               私たちの約束 (公約)
-              <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" size={20} />
             </button>
             <a
               href="#members"
@@ -60,11 +58,6 @@ const Hero: React.FC = () => {
             </a>
           </div>
         </div>
-      </div>
-      
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-brand-400">
-        <ArrowDown size={32} />
       </div>
     </div>
   );

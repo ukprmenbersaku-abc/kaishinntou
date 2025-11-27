@@ -74,7 +74,6 @@ const Members: React.FC = () => {
                         ) : (
                             <Smile size={48} className="text-brand-400 mb-1" />
                         )}
-                        <span className="text-brand-700 font-bold text-xs">No Image</span>
                     </div>
                 </div>
               </div>

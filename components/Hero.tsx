@@ -2,7 +2,6 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   const scrollToManifesto = () => {
-    // ハッシュを変更してルーターに処理させる（スムーズスクロールはApp.tsx側で制御）
     window.location.hash = '#manifesto';
   };
 
@@ -18,7 +17,7 @@ const Hero: React.FC = () => {
   return (
     <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-stone-50 pt-28 pb-12">
       
-      {/* Background decoration (CSS only, no images) */}
+      {/* Background decoration */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-brand-100 rounded-bl-[100px] opacity-60 blur-3xl transform translate-x-20 -translate-y-20"></div>
         <div className="absolute bottom-0 left-0 w-[60vw] h-[60vh] bg-teal-50 rounded-tr-[150px] opacity-60 blur-3xl transform -translate-x-20 translate-y-20"></div>
@@ -27,9 +26,10 @@ const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="text-center max-w-4xl mx-auto">
+          {/* Election Info Button */}
           <button 
             onClick={goToElectionInfo}
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all cursor-pointer"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all cursor-pointer relative z-20"
           >
             <span className="flex h-3 w-3 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>

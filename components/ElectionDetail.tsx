@@ -72,10 +72,10 @@ const ElectionDetail: React.FC<ElectionDetailProps> = ({ onBack }) => {
               選挙の流れ
             </h3>
             <div className="bg-stone-50 rounded-3xl p-12 text-center text-stone-500">
-              <p className="text-lg font-medium mb-2">詳細は現在調整中です</p>
+              <p className="text-lg font-medium mb-2">未定</p>
               <p className="text-sm">
-                立会演説会の時間や投票の詳細な流れについては、<br/>
-                学校からの正式な発表をお待ちください。
+                詳細は決定次第お知らせします。<br/>
+                学校からの連絡をお待ちください。
               </p>
             </div>
           </section>

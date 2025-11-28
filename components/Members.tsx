@@ -58,7 +58,7 @@ const Members: React.FC = () => {
             </div>
             <div className="text-left">
               <p className="text-sm text-stone-500 font-bold mb-1">技術提供者</p>
-              <p className="text-4xl font-extrabold text-stone-800 tracking-tight font-sans">userkunn</p>
+              <p className="text-4xl md:text-5xl font-extrabold text-stone-800 tracking-tight font-sans">userkunn</p>
             </div>
           </div>
         </div>

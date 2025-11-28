@@ -27,7 +27,7 @@ const ElectionDetail: React.FC<ElectionDetailProps> = ({ onBack }) => {
         {/* Header */}
         <div className="bg-brand-50 rounded-[2.5rem] p-8 md:p-12 mb-12 border border-brand-100 shadow-sm text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4 leading-tight">
-            令和7年度<br/>筑摩野中学校 生徒会役員選挙
+            令和9年度<br/>筑摩野中学校 生徒会役員選挙
           </h1>
           <p className="text-lg text-stone-600 font-medium">
             あなたの清き一票が、これからの学校を作ります。

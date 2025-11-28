@@ -11,8 +11,12 @@ const Hero: React.FC = () => {
     window.location.hash = '#members';
   };
 
+  const goToElectionInfo = () => {
+    window.location.hash = '#election';
+  };
+
   return (
-    <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-stone-50">
+    <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-stone-50 pt-28 pb-12">
       
       {/* Background decoration (CSS only, no images) */}
       <div className="absolute inset-0 z-0">
@@ -23,13 +27,17 @@ const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm">
+          <button 
+            onClick={goToElectionInfo}
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all cursor-pointer"
+          >
             <span className="flex h-3 w-3 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
             </span>
-            <span>令和6年度 筑摩野中学校 生徒会役員選挙</span>
-          </div>
+            <span>令和7年度 筑摩野中学校 生徒会役員選挙</span>
+            <span className="text-brand-400 text-xs ml-1 group-hover:translate-x-1 transition-transform">→ 詳細</span>
+          </button>
           
           <h1 className="text-5xl md:text-7xl font-bold text-stone-900 mb-8 leading-tight tracking-tight">
             学校生活に、<br/>

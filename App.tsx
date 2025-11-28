@@ -6,11 +6,12 @@ import Members from './components/Members';
 import AiChat from './components/AiChat';
 import Footer from './components/Footer';
 import PolicyDetail from './components/PolicyDetail';
+import ElectionDetail from './components/ElectionDetail';
 import { policies } from './data/policies';
 import { Policy } from './types';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
 
   useEffect(() => {
@@ -24,8 +25,14 @@ function App() {
         if (policy) {
           setSelectedPolicy(policy);
           setCurrentView('policy');
-          return; // Stop here, don't scroll to ID
+          return;
         }
+      }
+
+      // Check for Election Route
+      if (hash === '#election') {
+        setCurrentView('election');
+        return;
       }
 
       // Default to Main View
@@ -33,7 +40,6 @@ function App() {
       setSelectedPolicy(null);
 
       // Handle Smooth Scroll for Standard Anchors (#home, #manifesto, etc.)
-      // We need a small delay to ensure the DOM is rendered if we just switched back from Policy view
       if (hash && !hash.startsWith('#/')) {
         setTimeout(() => {
           const element = document.querySelector(hash);
@@ -58,8 +64,11 @@ function App() {
   }, []);
 
   const handleBackToHome = () => {
-    // Clear hash or go to #manifesto
-    window.location.hash = '#manifesto';
+    // Clear hash
+    window.history.pushState("", document.title, window.location.pathname + window.location.search);
+    // Manually trigger view update since pushState doesn't trigger hashchange
+    setCurrentView('main');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -91,11 +100,13 @@ function App() {
                </div>
           </section>
         </main>
+      ) : currentView === 'policy' && selectedPolicy ? (
+        <main>
+          <PolicyDetail policy={selectedPolicy} onBack={handleBackToHome} />
+        </main>
       ) : (
         <main>
-          {selectedPolicy && (
-            <PolicyDetail policy={selectedPolicy} onBack={handleBackToHome} />
-          )}
+          <ElectionDetail onBack={handleBackToHome} />
         </main>
       )}
 

@@ -14,7 +14,7 @@ const members: Member[] = [
     id: 'm2',
     name: '山﨑 朔',
     role: '共同代表 (1年3組)',
-    bio: '岩本と共に党を率いる共同代表。デジタル技術への造詣が深く、GIGAスクール構想の推進や防災委員会の設置など、具体的で実用的なシステム作りを担当し、改革を支える。',
+    bio: '岩本と共に党を率いる共同代表。デジタル技術にとても詳しく、GIGAスクール構想の推進や防災委員会の設置など、実用的なシステム作りを担当し、改革を支える。',
     image: 'images/yamazaki.png' // 未使用（型定義互換のため保持）
   }
 ];
@@ -33,14 +33,14 @@ const Members: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-10 max-w-4xl mx-auto mb-16">
           {members.map((member) => (
-            <div key={member.id} className="group bg-white rounded-3xl p-8 md:p-10 text-center shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100 flex flex-col justify-center h-full hover:-translate-y-1">
+            <div key={member.id} className="group bg-white rounded-3xl p-8 md:p-10 text-center shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100 flex flex-col h-full hover:-translate-y-1">
               <div className="mb-6">
                 <h4 className="text-4xl md:text-5xl font-bold text-stone-900 mb-4">{member.name}</h4>
                 <div className="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 font-bold text-sm md:text-base border border-brand-100">
                   {member.role}
                 </div>
               </div>
-              <p className="text-stone-600 text-base leading-relaxed text-left bg-stone-50 p-6 rounded-2xl border border-stone-100">
+              <p className="text-stone-600 text-base leading-relaxed text-left bg-stone-50 p-6 rounded-2xl border border-stone-100 flex-grow">
                 {member.bio}
               </p>
             </div>

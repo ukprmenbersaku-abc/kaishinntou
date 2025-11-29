@@ -32,7 +32,6 @@ const Hero: React.FC = () => {
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all cursor-pointer relative z-20"
           >
             <span>令和9年度 筑摩野中学校 生徒会役員選挙</span>
-            <span className="text-brand-400 text-xs ml-1 group-hover:translate-x-1 transition-transform">→ 詳細</span>
           </button>
           
           <h1 className="text-5xl md:text-7xl font-bold text-stone-900 mb-8 leading-tight tracking-tight">

@@ -7,14 +7,14 @@ const members: Member[] = [
     id: 'm1',
     name: '岩本 宗祐',
     role: '改新党 代表 (1年3組)',
-    bio: '1年生ながら改新党を立ち上げた行動派。「聴く学校」を掲げ、生徒一人ひとりの声が確実に届く生徒会を目指す。これまでの慣例に一瞥し、新しい風を吹き込む決意を持つ。',
+    bio: '1年生ながら改新党を立ち上げた行動派。「聴く学校」を掲げ、生徒一人ひとりの声が確実に届く生徒会を目指す。これまでの慣例にとらわれず、新しい風を吹き込む決意を持つ。',
     image: 'images/iwamoto.png' // 未使用（型定義互換のため保持）
   },
   {
     id: 'm2',
     name: '山﨑 朔',
     role: '共同代表 (1年3組)',
-    bio: '岩本と共に党を率いる。デジタル技術への造詣が深く、GIGAスクール構想の推進や防災委員会の設置など、具体的で実用的なシステム作りを担当する。',
+    bio: '岩本と共に党を率いる共同代表。デジタル技術への造詣が深く、GIGAスクール構想の推進や防災委員会の設置など、具体的で実用的なシステム作りを担当し、改革を支える。',
     image: 'images/yamazaki.png' // 未使用（型定義互換のため保持）
   }
 ];
@@ -35,7 +35,7 @@ const Members: React.FC = () => {
           {members.map((member) => (
             <div key={member.id} className="group bg-white rounded-3xl p-8 md:p-10 text-center shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100 flex flex-col justify-center h-full hover:-translate-y-1">
               <div className="mb-6">
-                <h4 className="text-3xl font-bold text-stone-900 mb-3">{member.name}</h4>
+                <h4 className="text-4xl md:text-5xl font-bold text-stone-900 mb-4">{member.name}</h4>
                 <div className="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 font-bold text-sm md:text-base border border-brand-100">
                   {member.role}
                 </div>
@@ -58,7 +58,7 @@ const Members: React.FC = () => {
             </div>
             <div className="text-left">
               <p className="text-sm text-stone-500 font-bold mb-1">技術提供者</p>
-              <p className="text-4xl md:text-5xl font-extrabold text-stone-800 tracking-tight font-sans">userkunn</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight font-sans">userkunn</p>
             </div>
           </div>
         </div>

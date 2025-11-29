@@ -91,7 +91,7 @@ function App() {
                     学校を変える力になる。
                   </h3>
                   <p className="text-brand-100 text-lg md:text-xl leading-relaxed mb-10">
-                    投票日は来週の金曜日です。<br/>
+                    あなたの一票が、未来を変える第一歩です。<br/>
                     私たちと一緒に、もっと自由で、もっと楽しい筑摩野中を作りましょう。
                   </p>
                   <div className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg">

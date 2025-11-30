@@ -12,8 +12,9 @@ const Footer: React.FC = () => {
           （代表：1年3組 岩本宗祐 / 共同代表：1年3組 山﨑朔）
         </p>
         <div className="text-xs text-stone-600 flex flex-col items-center gap-2">
-          <p>&copy; 2024 Chikumano Kaishin Party.</p>
+          <p>&copy; 2025 Chikumano Kaishin Party.</p>
           <p className="opacity-50">Technical Support: userkunn</p>
+          <p className="opacity-50">thank you for google ai studio</p>
         </div>
       </div>
     </footer>

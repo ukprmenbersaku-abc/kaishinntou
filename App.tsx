@@ -101,9 +101,14 @@ function App() {
                     あなたの一票が、未来を変える第一歩です。<br/>
                     私たちと一緒に、もっと自由で、もっと楽しい筑摩野中を作りましょう。
                   </p>
-                  <div className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg">
+                  <a
+                    href="https://forms.gle/unGfDqs9yaEQTcNMA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-100 transition-colors cursor-pointer"
+                  >
                     応援よろしくお願いします！
-                  </div>
+                  </a>
                </div>
           </section>
         </main>

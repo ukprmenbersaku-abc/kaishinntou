@@ -7,12 +7,15 @@ import AiChat from './components/AiChat';
 import Footer from './components/Footer';
 import PolicyDetail from './components/PolicyDetail';
 import ElectionDetail from './components/ElectionDetail';
+import MemberDetail from './components/MemberDetail';
 import { policies } from './data/policies';
-import { Policy } from './types';
+import { members } from './data/members';
+import { Policy, Member } from './types';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -29,6 +32,17 @@ function App() {
         }
       }
 
+      // Check for Member Route: #/member/id
+      if (hash.startsWith('#/member/')) {
+        const memberId = hash.replace('#/member/', '');
+        const member = members.find(m => m.id === memberId);
+        if (member) {
+          setSelectedMember(member);
+          setCurrentView('member');
+          return;
+        }
+      }
+
       // Check for Election Route
       if (hash === '#election') {
         setCurrentView('election');
@@ -38,6 +52,7 @@ function App() {
       // Default to Main View
       setCurrentView('main');
       setSelectedPolicy(null);
+      setSelectedMember(null);
 
       // Handle Smooth Scroll for Standard Anchors (#home, #manifesto, etc.)
       if (hash && !hash.startsWith('#/')) {
@@ -46,7 +61,7 @@ function App() {
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
           }
-        }, 50);
+        }, 100);
       } else if (!hash || hash === '#home') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -62,14 +77,6 @@ function App() {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
-
-  const handleBackToHome = () => {
-    // Clear hash
-    window.history.pushState("", document.title, window.location.pathname + window.location.search);
-    // Manually trigger view update since pushState doesn't trigger hashchange
-    setCurrentView('main');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
@@ -102,11 +109,23 @@ function App() {
         </main>
       ) : currentView === 'policy' && selectedPolicy ? (
         <main>
-          <PolicyDetail policy={selectedPolicy} onBack={handleBackToHome} />
+          <PolicyDetail 
+            policy={selectedPolicy} 
+            onBack={() => window.location.hash = '#manifesto'} 
+          />
+        </main>
+      ) : currentView === 'member' && selectedMember ? (
+        <main>
+           <MemberDetail 
+            member={selectedMember} 
+            onBack={() => window.location.hash = '#members'} 
+           />
         </main>
       ) : (
         <main>
-          <ElectionDetail onBack={handleBackToHome} />
+          <ElectionDetail 
+            onBack={() => window.location.hash = '#home'} 
+          />
         </main>
       )}
 

@@ -3,43 +3,43 @@ import { ArrowLeft, Calendar, Clock, MapPin } from 'lucide-react';
 
 const scheduleData = [
   {
-    date: '2025年X月X日(月)',
-    title: '選挙公示・選挙活動開始',
-    time: '8:15〜',
-    location: '校内掲示板・放送',
-    description: '令和9年度生徒会役員選挙の公示が行われます。ポスター掲示やお昼の放送での演説がスタートします。',
+    date: '2025年12月4日(木)',
+    title: '生徒会⑪',
+    time: '放課後',
+    location: '生徒会室',
+    description: '第11回生徒会委員会。後期の活動報告まとめと、次期生徒会への引き継ぎ事項の確認を行います。',
     isDone: true
   },
   {
-    date: '2025年X月X日(水)',
-    title: '立会演説会',
+    date: '2025年12月11日(木)',
+    title: '新入生説明会',
+    time: '午後',
+    location: '本校 体育館',
+    description: '来年度入学予定の小学6年生とその保護者を対象とした説明会です。生徒会役員から中学校生活についてのプレゼンテーションを行います。',
+    isDone: false
+  },
+  {
+    date: '2025年12月18日(木)',
+    title: '生徒総会',
     time: '5,6時間目',
     location: '本校 体育館',
-    description: '全校生徒が体育館に集まり、候補者による演説を行います。私たちの熱い思いを直接届けます。',
+    description: '全校生徒による後期活動の総括。各委員会の活動報告と、生徒からの質疑応答が行われます。今年度の締めくくりとなる重要な会です。',
     isDone: false
   },
   {
-    date: '2025年X月X日(木)',
-    title: '投票日',
-    time: '朝の会・帰りの会',
-    location: '各教室 (Googleフォーム)',
-    description: '各教室にてタブレットを使用した投票が行われます。あなたの一票で学校が変わります。',
+    date: '2025年12月19日(金)',
+    title: '生徒会役員引継ぎ',
+    time: '放課後',
+    location: '生徒会室・各教室',
+    description: '現3年生役員から、新しく選出された2年生・1年生役員へのバトンタッチ。正式に新体制がスタートします。',
     isDone: false
   },
   {
-    date: '2025年X月X日(金)',
-    title: '開票結果発表',
-    time: 'お昼の放送',
-    location: '放送室より',
-    description: '選挙管理委員会より、全校放送にて開票結果が発表されます。',
-    isDone: false
-  },
-  {
-    date: '2025年X月X日(月)',
-    title: '生徒総会（新体制発足）',
-    time: '6時間目',
-    location: '本校 体育館',
-    description: '新生徒会役員の認証式と、新体制での最初の生徒総会が行われます。',
+    date: '2026年4月(未定)',
+    title: '二学年代議員会選抜',
+    time: '未定',
+    location: '各教室',
+    description: '新2年生の中から、クラスの代表となる代議員を選出します。新しいクラスでの最初の重要な決め事です。',
     isDone: false
   }
 ];
@@ -72,10 +72,10 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
           <div className="inline-flex items-center justify-center p-4 bg-brand-50 rounded-2xl mb-6 text-brand-600">
             <Calendar size={40} />
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-stone-900 mb-6">選挙スケジュール詳細</h1>
+          <h1 className="text-3xl md:text-5xl font-bold text-stone-900 mb-6">活動スケジュール詳細</h1>
           <p className="text-stone-500 max-w-2xl mx-auto">
-            告示から投票、そして新体制発足までの流れです。<br/>
-            大切な行事が続きますので、日程の確認をお願いします。
+            生徒会の今後の活動予定です。<br/>
+            引継ぎから新年度の準備まで、重要な行事が続きます。
           </p>
         </div>
 

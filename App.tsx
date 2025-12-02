@@ -103,20 +103,21 @@ function App() {
                
                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
                   <h3 className="text-3xl md:text-5xl font-bold mb-8 leading-normal font-sans">
-                    あなたの一票が、<br/>
-                    学校を変える力になる。
+                    あなたの声を、<br/>
+                    お聞かせください。
                   </h3>
                   <p className="text-brand-100 text-lg md:text-xl leading-relaxed mb-10">
-                    あなたの一票が、未来を変える第一歩です。<br/>
-                    私たちと一緒に、もっと自由で、もっと楽しい筑摩野中を作りましょう。
+                    筑摩野改新党は、皆さんと一緒に作る生徒会です。<br/>
+                    学校生活の悩み、公約への質問、私たちへの要望など、<br className="hidden md:inline"/>
+                    どんな小さなことでも構いません。率直な意見をお待ちしています。
                   </p>
                   <a
                     href="https://forms.gle/unGfDqs9yaEQTcNMA"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-100 transition-colors cursor-pointer"
+                    className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-100 transition-colors cursor-pointer transform hover:-translate-y-1"
                   >
-                    応援よろしくお願いします！
+                    意見・質問・要望はこちらから
                   </a>
                </div>
           </section>

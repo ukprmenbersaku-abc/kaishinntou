@@ -8,6 +8,7 @@ const Navbar: React.FC = () => {
     { name: 'ホーム', href: '#home' },
     { name: '公約', href: '#manifesto' },
     { name: '候補者', href: '#members' },
+    { name: 'スケジュール', href: '#schedule' },
     { name: 'Q&A', href: '#qa' },
   ];
 
@@ -52,14 +53,6 @@ const Navbar: React.FC = () => {
                 {link.name}
               </a>
             ))}
-            <a
-              href="https://forms.gle/unGfDqs9yaEQTcNMA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-brand-600 text-white hover:bg-brand-700 px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg cursor-pointer"
-            >
-              応援メッセージ
-            </a>
           </div>
 
           <div className="md:hidden flex items-center">
@@ -87,14 +80,6 @@ const Navbar: React.FC = () => {
                 {link.name}
               </a>
             ))}
-             <a
-              href="https://forms.gle/unGfDqs9yaEQTcNMA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full text-center mt-4 bg-brand-600 text-white hover:bg-brand-700 block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
-            >
-              応援メッセージ
-            </a>
           </div>
         </div>
       )}

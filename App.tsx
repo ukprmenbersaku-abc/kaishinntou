@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Manifesto from './components/Manifesto';
 import Members from './components/Members';
+import Schedule from './components/Schedule';
+import ScheduleDetail from './components/ScheduleDetail';
 import AiChat from './components/AiChat';
 import Footer from './components/Footer';
 import PolicyDetail from './components/PolicyDetail';
@@ -13,7 +15,7 @@ import { members } from './data/members';
 import { Policy, Member } from './types';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'schedule'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
@@ -46,6 +48,12 @@ function App() {
       // Check for Election Route
       if (hash === '#election') {
         setCurrentView('election');
+        return;
+      }
+
+      // Check for Schedule Detail Route
+      if (hash === '#schedule-detail') {
+        setCurrentView('schedule');
         return;
       }
 
@@ -87,6 +95,7 @@ function App() {
           <Hero />
           <Manifesto />
           <Members />
+          <Schedule />
           <AiChat />
           <section id="support" className="py-24 bg-brand-900 text-white relative overflow-hidden">
                {/* Simple pattern background */}
@@ -125,6 +134,12 @@ function App() {
             member={selectedMember} 
             onBack={() => window.location.hash = '#members'} 
            />
+        </main>
+      ) : currentView === 'schedule' ? (
+        <main>
+          <ScheduleDetail
+            onBack={() => window.location.hash = '#schedule'}
+          />
         </main>
       ) : (
         <main>

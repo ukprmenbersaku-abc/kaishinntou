@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'ホーム', href: '#home' },
     { name: '公約', href: '#manifesto' },
-    { name: '候補者', href: '#members' },
+    { name: '主要党員', href: '#members' },
     { name: 'スケジュール', href: '#schedule' },
     { name: 'Q&A', href: '#qa' },
   ];

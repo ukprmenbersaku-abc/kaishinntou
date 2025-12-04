@@ -19,9 +19,9 @@ const PolicyDetail: React.FC<PolicyDetailProps> = ({ policy, onBack }) => {
         {/* Navigation */}
         <button 
           onClick={onBack}
-          className="group flex items-center text-stone-500 hover:text-brand-600 mb-8 transition-colors"
+          className="group flex items-center text-stone-500 hover:text-brand-600 mb-8 transition-colors duration-300"
         >
-          <div className="bg-stone-100 p-2 rounded-full mr-3 group-hover:bg-brand-50 transition-colors">
+          <div className="bg-stone-100 p-2 rounded-full mr-3 group-hover:bg-brand-50 transition-colors duration-300">
             <ArrowLeft size={20} />
           </div>
           <span className="font-bold">公約一覧に戻る</span>
@@ -114,7 +114,7 @@ const PolicyDetail: React.FC<PolicyDetailProps> = ({ policy, onBack }) => {
           </p>
           <button 
             onClick={onBack}
-            className="inline-flex items-center justify-center px-8 py-3 border border-stone-200 rounded-full text-stone-600 hover:bg-stone-50 hover:text-stone-900 font-bold transition-all"
+            className="inline-flex items-center justify-center px-8 py-3 border border-stone-200 rounded-full text-stone-600 hover:bg-stone-50 hover:text-stone-900 font-bold transition-all duration-300"
           >
             トップページに戻る
           </button>

@@ -117,7 +117,7 @@ function App() {
                     href="https://forms.gle/unGfDqs9yaEQTcNMA"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-100 transition-all duration-700 cursor-pointer transform hover:-translate-y-1"
+                    className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-100 transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
                   >
                     意見・質問・要望はこちらから
                   </a>

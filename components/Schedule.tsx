@@ -50,7 +50,7 @@ const Schedule: React.FC = () => {
 
         <button
           onClick={handleDetailClick}
-          className="group inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-brand-100 text-brand-700 rounded-full font-bold hover:bg-brand-50 hover:border-brand-200 transition-all shadow-sm hover:shadow-md"
+          className="group inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-brand-100 text-brand-700 rounded-full font-bold hover:bg-brand-50 hover:border-brand-200 transition-all duration-300 shadow-sm hover:shadow-md"
         >
           詳しい予定を見る
           <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

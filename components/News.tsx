@@ -44,7 +44,7 @@ const News: React.FC = () => {
         <div className="flex flex-col gap-6">
           
           {/* Title Section */}
-          <div className="w-full">
+          <div className="w-full text-center flex flex-col items-center">
             <div className="flex items-center gap-2 mb-2">
               <Bell className="text-brand-500" size={24} />
               <h2 className="text-2xl font-bold text-stone-900 tracking-tight">News</h2>
@@ -59,7 +59,7 @@ const News: React.FC = () => {
                 <a 
                   key={item.id} 
                   href={item.link}
-                  className="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-4 rounded-xl bg-stone-50 hover:bg-brand-50/50 border border-stone-100 hover:border-brand-100 transition-all cursor-pointer"
+                  className="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-4 rounded-xl bg-stone-50 hover:bg-brand-50/50 border border-stone-100 hover:border-brand-100 transition-all duration-300 cursor-pointer"
                   onClick={(e) => {
                     // Smooth scroll handle if it's an anchor link
                     if (item.link.startsWith('#')) {
@@ -91,7 +91,7 @@ const News: React.FC = () => {
             </div>
             
             <div className="mt-4 text-right">
-              <a href="#schedule-detail" className="inline-flex items-center text-xs font-bold text-stone-400 hover:text-brand-600 transition-colors">
+              <a href="#schedule-detail" className="inline-flex items-center text-xs font-bold text-stone-400 hover:text-brand-600 transition-colors duration-300">
                 すべてのニュースを見る <ChevronRight size={14} />
               </a>
             </div>

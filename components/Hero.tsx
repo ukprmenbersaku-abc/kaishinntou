@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           {/* Election Info Button */}
           <button 
             onClick={goToElectionInfo}
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all cursor-pointer relative z-20"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all duration-300 cursor-pointer relative z-20"
           >
             <span>令和9年度 筑摩野中学校 生徒会役員選挙</span>
           </button>
@@ -48,14 +48,14 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <button
               onClick={scrollToManifesto}
-              className="group inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-brand-600 hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-1"
+              className="group inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-brand-600 hover:bg-brand-700 transition-all duration-300 shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-1"
             >
               私たちの約束 (公約)
             </button>
             <a
               href="#members"
               onClick={scrollToMembers}
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-100 text-lg font-bold rounded-full text-brand-700 bg-white hover:bg-brand-50 transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-100 text-lg font-bold rounded-full text-brand-700 bg-white hover:bg-brand-50 transition-all duration-300"
             >
               候補者を知る
             </a>

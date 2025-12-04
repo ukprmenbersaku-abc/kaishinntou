@@ -186,9 +186,9 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
         {/* Navigation */}
         <button 
           onClick={onBack}
-          className="group flex items-center text-stone-500 hover:text-brand-600 mb-8 transition-colors"
+          className="group flex items-center text-stone-500 hover:text-brand-600 mb-8 transition-colors duration-300"
         >
-          <div className="bg-stone-100 p-2 rounded-full mr-3 group-hover:bg-brand-50 transition-colors">
+          <div className="bg-stone-100 p-2 rounded-full mr-3 group-hover:bg-brand-50 transition-colors duration-300">
             <ArrowLeft size={20} />
           </div>
           <span className="font-bold">トップに戻る</span>
@@ -211,7 +211,7 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
           <div className="bg-brand-50 p-6 flex items-center justify-between rounded-t-3xl">
             <button 
               onClick={prevMonth}
-              className="p-2 hover:bg-white rounded-full transition-colors text-brand-700 cursor-pointer"
+              className="p-2 hover:bg-white rounded-full transition-colors duration-300 text-brand-700 cursor-pointer"
             >
               <ChevronLeft size={24} />
             </button>
@@ -220,7 +220,7 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
             </h2>
             <button 
               onClick={nextMonth}
-              className="p-2 hover:bg-white rounded-full transition-colors text-brand-700 cursor-pointer"
+              className="p-2 hover:bg-white rounded-full transition-colors duration-300 text-brand-700 cursor-pointer"
             >
               <ChevronRight size={24} />
             </button>
@@ -269,7 +269,7 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
                     key={day} 
                     onClick={() => hasEvent && setSelectedDate(isSelected ? null : day)}
                     className={`
-                      aspect-square md:aspect-auto md:h-32 rounded-xl p-2 border transition-all relative flex flex-col items-start justify-start
+                      aspect-square md:aspect-auto md:h-32 rounded-xl p-2 border transition-all duration-300 relative flex flex-col items-start justify-start
                       ${hasEvent 
                         ? 'bg-brand-50 border-brand-200 cursor-pointer hover:shadow-md hover:border-brand-400' 
                         : 'bg-white border-transparent text-stone-400'
@@ -292,11 +292,11 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
                             <span className="md:hidden block w-2 h-2 rounded-full bg-current mx-auto"></span>
                           </div>
 
-                          {/* Hover Tooltip */}
-                          {/* isSingleEventの場合は親のgroup/dateホバーで表示、それ以外は自身のgroup/eventホバーで表示 */}
+                          {/* Hover Tooltip / Selected Popup */}
                           <div className={`
-                            opacity-0 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-stone-900 text-white text-xs rounded-xl shadow-xl z-[100] pointer-events-none p-4
+                            opacity-0 transition-opacity duration-300 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-stone-900 text-white text-xs rounded-xl shadow-xl z-[100] p-4
                             ${isSingleEvent ? 'group-hover/date:opacity-100' : 'group-hover/event:opacity-100'}
+                            ${isSelected ? '!opacity-100 pointer-events-auto' : 'pointer-events-none'}
                           `}>
                             <div className="font-bold text-sm mb-1">{evt.title}</div>
                             <div className="flex items-center gap-1 mb-1 text-stone-300">
@@ -371,7 +371,7 @@ const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
                   <div 
                     key={index} 
                     className={`
-                      flex flex-col md:flex-row gap-4 p-5 rounded-2xl border transition-all relative
+                      flex flex-col md:flex-row gap-4 p-5 rounded-2xl border transition-all duration-300 relative
                       ${selectedDate === event.day 
                         ? 'bg-brand-50 border-brand-200 shadow-md transform scale-[1.01]' 
                         : 'bg-white border-stone-100 shadow-sm hover:shadow-md'

@@ -16,9 +16,9 @@ const ElectionDetail: React.FC<ElectionDetailProps> = ({ onBack }) => {
         {/* Navigation */}
         <button 
           onClick={onBack}
-          className="group flex items-center text-stone-500 hover:text-brand-600 mb-8 transition-colors"
+          className="group flex items-center text-stone-500 hover:text-brand-600 mb-8 transition-colors duration-300"
         >
-          <div className="bg-stone-100 p-2 rounded-full mr-3 group-hover:bg-brand-50 transition-colors">
+          <div className="bg-stone-100 p-2 rounded-full mr-3 group-hover:bg-brand-50 transition-colors duration-300">
             <ArrowLeft size={20} />
           </div>
           <span className="font-bold">ホームに戻る</span>
@@ -84,7 +84,7 @@ const ElectionDetail: React.FC<ElectionDetailProps> = ({ onBack }) => {
         <div className="mt-12 text-center">
           <button 
             onClick={() => window.location.hash = '#manifesto'}
-            className="inline-flex items-center justify-center px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold transition-all shadow-md hover:shadow-lg"
+            className="inline-flex items-center justify-center px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold transition-all duration-300 shadow-md hover:shadow-lg"
           >
             改新党の公約を見る
           </button>

@@ -76,7 +76,10 @@ const AiChat: React.FC = () => {
         <div className="mt-12 text-center bg-stone-100 rounded-2xl p-6">
           <p className="text-stone-600 mb-2 font-medium">他に聞きたいことはありますか？</p>
           <p className="text-sm text-stone-500">
-            休み時間に1年3組　岩本宗祐へお気軽にどうぞ
+            休み時間に1年3組　岩本宗祐へお気軽にどうぞ<br />
+            <a href="https://forms.gle/unGfDqs9yaEQTcNMA" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-800 transition-colors">
+              フォームからも質問いただけます
+            </a>
           </p>
         </div>
       </div>

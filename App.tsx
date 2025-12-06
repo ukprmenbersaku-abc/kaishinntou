@@ -12,25 +12,33 @@ import PolicyDetail from './components/PolicyDetail';
 import ElectionDetail from './components/ElectionDetail';
 import MemberDetail from './components/MemberDetail';
 import SecretDashboard from './components/SecretDashboard';
+import SecretArchive from './components/SecretArchive';
+import SecretMeeting from './components/SecretMeeting';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
+import { Loader2, LockKeyhole } from 'lucide-react';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'schedule'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'schedule' | 'secret-archive' | 'secret-meeting'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
   // Auth State
   const [user, setUser] = useState<any>(null);
+  const [authInitialized, setAuthInitialized] = useState(false);
 
   useEffect(() => {
     // Firebase Auth Listener
     if (window.firebase && window.firebase.onAuthStateChanged) {
       const unsubscribe = window.firebase.onAuthStateChanged(window.firebase.auth, (currentUser: any) => {
         setUser(currentUser);
+        setAuthInitialized(true); // 認証チェック完了
       });
       return () => unsubscribe();
+    } else {
+      // Firebaseがない場合（プレビュー等）も初期化完了とする
+      setAuthInitialized(true);
     }
   }, []);
 
@@ -58,6 +66,16 @@ function App() {
           setCurrentView('member');
           return;
         }
+      }
+
+      // Check for Secret Routes
+      if (hash === '#/secret/archive') {
+        setCurrentView('secret-archive');
+        return;
+      }
+      if (hash === '#/secret/meeting') {
+        setCurrentView('secret-meeting');
+        return;
       }
 
       // Check for Election Route
@@ -103,19 +121,73 @@ function App() {
 
   const handleLogout = () => {
     if (window.firebase && window.firebase.signOut) {
-      window.firebase.signOut(window.firebase.auth);
+      window.firebase.signOut(window.firebase.auth).then(() => {
+        // ログアウト後はホームへ
+        window.location.hash = '#home';
+        window.location.reload();
+      });
     }
   };
+
+  // 認証チェック中はローディングを表示（一瞬でも未認証画面を見せないため）
+  if (!authInitialized) {
+    return (
+      <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center text-stone-400">
+        <Loader2 className="animate-spin mb-4" size={40} />
+        <p className="text-sm font-bold">Loading system...</p>
+      </div>
+    );
+  }
+
+  // セキュリティガード: シークレットページへのアクセス時に未認証ならエラー表示
+  if ((currentView === 'secret-archive' || currentView === 'secret-meeting') && !user) {
+    return (
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center p-4">
+        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl max-w-lg w-full text-center border border-red-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-8 opacity-5 text-red-500 pointer-events-none">
+             <LockKeyhole size={150} />
+          </div>
+          
+          <div className="relative z-10">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-red-50 text-red-500 rounded-full mb-6">
+              <LockKeyhole size={40} />
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold text-stone-900 mb-4">
+              アクセス権限がありません
+            </h1>
+            <p className="text-stone-600 mb-8 leading-relaxed">
+              このページ（党員専用エリア）を表示するには認証が必要です。<br/>
+              ログインしていないか、セッションが切れました。
+            </p>
+            <div className="flex flex-col gap-3">
+              <button 
+                onClick={() => window.location.hash = '#members'} 
+                className="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-all duration-300 shadow-lg shadow-brand-100 transform hover:-translate-y-1"
+              >
+                ログインページへ移動
+              </button>
+              <button 
+                onClick={() => window.location.hash = '#home'} 
+                className="w-full py-3.5 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 rounded-xl font-bold transition-colors"
+              >
+                トップページへ戻る
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
       <Navbar />
       
       {/* 
-         党員がログインしている場合、ナビゲーションバーの直下に
-         「公式サイト + 専用情報」としてダッシュボードを表示する
+         メインビューかつログイン済みの場合のみダッシュボードを表示
+         （アーカイブ等の詳細ページではダッシュボードは非表示にする）
       */}
-      {user && (
+      {user && currentView === 'main' && (
         <SecretDashboard 
           userEmail={user.email} 
           userId={user.uid}
@@ -174,6 +246,20 @@ function App() {
         <main>
           <ScheduleDetail
             onBack={() => window.location.hash = '#schedule'}
+          />
+        </main>
+      ) : currentView === 'secret-archive' ? (
+        // 認証済みユーザーのみ到達可能
+        <main>
+          <SecretArchive 
+            onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'secret-meeting' ? (
+        // 認証済みユーザーのみ到達可能
+        <main>
+          <SecretMeeting
+            onBack={() => window.location.hash = '#home'}
           />
         </main>
       ) : (

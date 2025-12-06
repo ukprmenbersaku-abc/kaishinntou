@@ -28,8 +28,9 @@ const Members: React.FC = () => {
           email,
           password
         );
-        // ログイン成功時、member.htmlへジャンプ
-        window.location.href = '/member.html';
+        // ログイン成功時はページをリロードしてApp.tsxのAuthチェックを走らせる、
+        // またはReactの状態更新を待つ。ここではシンプルにリロードして確実に最新状態にする。
+        window.location.href = '/';
       } else {
         throw new Error("Firebase SDK is not initialized");
       }
@@ -137,15 +138,12 @@ const Members: React.FC = () => {
           </div>
 
           {/* Login Section */}
-          <div className="bg-stone-900 rounded-3xl p-8 md:p-12 text-center shadow-lg border border-stone-800 relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-stone-700 opacity-20 rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
-
+          <div className="bg-white rounded-3xl p-8 md:p-12 text-center shadow-lg border border-stone-200 relative overflow-hidden">
             <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-stone-800 rounded-2xl text-white mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-stone-100 rounded-2xl text-stone-600 mb-6">
                 <Lock size={32} />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">
+              <h3 className="text-2xl font-bold text-stone-900 mb-4">
                 党員専用ページ
               </h3>
               
@@ -156,7 +154,7 @@ const Members: React.FC = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-stone-800 border border-stone-700 text-white placeholder-stone-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 placeholder-stone-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 text-sm"
                     placeholder="メールアドレス"
                   />
                 </div>
@@ -166,13 +164,13 @@ const Members: React.FC = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-stone-800 border border-stone-700 text-white placeholder-stone-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 placeholder-stone-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 text-sm"
                     placeholder="パスワード"
                   />
                 </div>
 
                 {loginError && (
-                  <div className="text-red-400 text-xs text-left flex items-center gap-1">
+                  <div className="text-red-500 text-xs text-left flex items-center gap-1">
                      <span>⚠️</span> {loginError}
                   </div>
                 )}
@@ -180,7 +178,7 @@ const Members: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoggingIn}
-                  className="w-full py-3 bg-white hover:bg-stone-200 text-stone-900 rounded-xl font-bold shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isLoggingIn ? (
                     <>
@@ -195,7 +193,7 @@ const Members: React.FC = () => {
                   )}
                 </button>
               </form>
-              <p className="text-stone-500 text-xs mt-4">
+              <p className="text-stone-400 text-xs mt-4">
                 ※党員登録済みのメンバーのみアクセス可能です
               </p>
             </div>

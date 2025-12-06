@@ -54,7 +54,7 @@
     </script>
     <script type="module">
       // --------------------------------------------------------------------------
-      // 1. 必要なSDKのインポート (Auth と Firestore を追加しました)
+      // 1. 必要なSDKのインポート (Auth と Firestore と Realtime DB)
       // --------------------------------------------------------------------------
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
@@ -63,8 +63,9 @@
         onAuthStateChanged, 
         signInWithEmailAndPassword, 
         signOut 
-      } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";       // ⭐ 追加: 認証用関数
-      import { getFirestore } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js"; // ⭐ 追加: データベース用
+      } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js"; // ⭐ 追加: Realtime DB
 
       // --------------------------------------------------------------------------
       // 2. あなたの web app's Firebase configuration
@@ -83,15 +84,19 @@
       // 3. Firebase アプリと各サービスの初期化 (変数に格納)
       // --------------------------------------------------------------------------
       const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app); // アナリティクス
+      const analytics = getAnalytics(app); 
       
-      const auth = getAuth(app);         // 認証サービス
-      const db = getFirestore(app);      // Firestoreサービス
+      const auth = getAuth(app);         
+      const db = getFirestore(app);      
+      const rtdb = getDatabase(app);     // ⭐ 追加
 
       // ⭐ 追加: React側(index.tsx)から利用できるように window オブジェクトに公開
       window.firebase = {
         auth,
         db,
+        rtdb,           // Realtime DB インスタンス
+        rtdb_ref: ref,  // Realtime DB ref関数
+        rtdb_get: get,  // Realtime DB get関数
         onAuthStateChanged,
         signInWithEmailAndPassword,
         signOut

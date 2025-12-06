@@ -10,7 +10,10 @@ declare global {
   interface Window {
     firebase: {
       auth: any;
-      db: any;
+      db: any; // Firestore
+      rtdb: any; // Realtime Database
+      rtdb_ref: any; // Realtime Database ref function
+      rtdb_get: any; // Realtime Database get function
       signInWithEmailAndPassword: (auth: any, email: string, pass: string) => Promise<any>;
       signOut: (auth: any) => Promise<void>;
       onAuthStateChanged: (auth: any, callback: (user: any) => void) => () => void;

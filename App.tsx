@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import PolicyDetail from './components/PolicyDetail';
 import ElectionDetail from './components/ElectionDetail';
 import MemberDetail from './components/MemberDetail';
+import SecretDashboard from './components/SecretDashboard';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
@@ -19,6 +20,19 @@ function App() {
   const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'schedule'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+  
+  // Auth State
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Firebase Auth Listener
+    if (window.firebase && window.firebase.onAuthStateChanged) {
+      const unsubscribe = window.firebase.onAuthStateChanged(window.firebase.auth, (currentUser: any) => {
+        setUser(currentUser);
+      });
+      return () => unsubscribe();
+    }
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -87,10 +101,28 @@ function App() {
     };
   }, []);
 
+  const handleLogout = () => {
+    if (window.firebase && window.firebase.signOut) {
+      window.firebase.signOut(window.firebase.auth);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
       <Navbar />
       
+      {/* 
+         党員がログインしている場合、ナビゲーションバーの直下に
+         「公式サイト + 専用情報」としてダッシュボードを表示する
+      */}
+      {user && (
+        <SecretDashboard 
+          userEmail={user.email} 
+          userId={user.uid}
+          onLogout={handleLogout}
+        />
+      )}
+
       {currentView === 'main' ? (
         <main>
           <Hero />

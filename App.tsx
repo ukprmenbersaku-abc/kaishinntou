@@ -161,14 +161,8 @@ function App() {
             </p>
             <div className="flex flex-col gap-3">
               <button 
-                onClick={() => window.location.hash = '#members'} 
-                className="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-all duration-300 shadow-lg shadow-brand-100 transform hover:-translate-y-1"
-              >
-                ログインページへ移動
-              </button>
-              <button 
                 onClick={() => window.location.hash = '#home'} 
-                className="w-full py-3.5 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 rounded-xl font-bold transition-colors"
+                className="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition-all duration-300 shadow-lg shadow-brand-100 transform hover:-translate-y-1"
               >
                 トップページへ戻る
               </button>
@@ -181,7 +175,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
-      <Navbar />
+      <Navbar user={user} />
       
       {/* 
          メインビューかつログイン済みの場合のみダッシュボードを表示

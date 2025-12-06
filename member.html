@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>党員専用ページ | 筑摩野改新党</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -36,11 +34,11 @@
       }
     </script>
 
-    <!-- Firebase SDKs -->
     <script type="module">
+      // ⭐ 修正点1: Realtime Database用のSDKに切り替えます
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-      import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js"; // 👈 ここを変更
 
       // Firebase Config
       const firebaseConfig = {
@@ -56,7 +54,7 @@
       // Initialize
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-      const db = getFirestore(app);
+      const const db = getDatabase(app); // 👈 修正点2: Realtime Databaseを初期化
 
       // DOM Elements
       const loadingScreen = document.getElementById('loading-screen');
@@ -72,20 +70,32 @@
           console.log("User is logged in:", user.email);
           userNameEl.textContent = user.email;
 
-          // Fetch Secret Content (Example)
+          // ⭐ 修正点3: Realtime Databaseからデータを取得するロジック
           try {
-             // ダミーのテキストを表示（Firestore接続テスト用）
-             // 実際には doc(db, "secrets", "memberOnly") などを取得する
-             secretContentEl.innerHTML = `
-                <div class="p-4 bg-brand-50 border border-brand-100 rounded-lg text-brand-800">
-                    <p class="font-bold mb-2">🎉 認証成功</p>
-                    <p>ようこそ、党員専用エリアへ。<br>現在、限定コンテンツを準備中です。</p>
-                    <p class="text-xs mt-2 text-stone-500">User ID: ${user.uid}</p>
-                </div>
-             `;
+             // Realtime DBのパスを指定 ('secret_content/message')
+             const contentRef = ref(db, 'secret_content/message');
+             const snapshot = await get(contentRef);
+             
+             let contentHtml = '';
+
+             if (snapshot.exists()) {
+                const message = snapshot.val();
+                contentHtml = `
+                    <div class="p-4 bg-brand-50 border border-brand-100 rounded-lg text-brand-800">
+                        <p class="font-bold mb-2">🎉 認証成功 - 党員限定メッセージ</p>
+                        <p>${message}</p>
+                        <p class="text-xs mt-2 text-stone-500">User ID: ${user.uid}</p>
+                    </div>
+                `;
+             } else {
+                 contentHtml = `<p class="text-red-600">エラー: 限定コンテンツが見つかりません。データベースを確認してください。</p>`;
+             }
+             
+             secretContentEl.innerHTML = contentHtml;
+
           } catch (e) {
             console.error("Error fetching data:", e);
-            secretContentEl.textContent = "データの取得に失敗しました。";
+            secretContentEl.textContent = "データの取得に失敗しました。セキュリティルールかDB接続を確認してください。";
           }
 
           loadingScreen.classList.add('hidden');
@@ -107,7 +117,6 @@
   </head>
   <body class="bg-stone-100 text-stone-800 min-h-screen">
     
-    <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-stone-50 z-50 flex items-center justify-center">
         <div class="flex flex-col items-center gap-4">
             <div class="animate-spin rounded-full h-12 w-12 border-4 border-brand-200 border-t-brand-600"></div>
@@ -115,10 +124,8 @@
         </div>
     </div>
 
-    <!-- Main Content (Hidden by default) -->
     <div id="content-screen" class="hidden">
         
-        <!-- Navbar -->
         <nav class="bg-white border-b border-stone-200 px-6 py-4 flex justify-between items-center sticky top-0 z-40">
             <div class="flex items-center gap-2">
                 <div class="bg-brand-500 text-white p-1.5 rounded-full">
@@ -134,21 +141,17 @@
             </div>
         </nav>
 
-        <!-- Content Body -->
         <main class="max-w-4xl mx-auto px-4 py-12">
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-stone-200 mb-8">
-                <h1 class="text-3xl font-bold text-stone-900 mb-6">Member's Only Content</h1>
+                <h1 class="text-3xl font-bold text-stone-900 mb-6">党員限定の活動記録</h1>
                 <p class="text-stone-600 mb-8">
                     ここには、一般公開されていない党員限定の活動記録や、未公開の資料が表示されます。
                 </p>
 
-                <!-- Dynamic Content Area -->
                 <div id="secret-content" class="space-y-4">
-                    <!-- Javascript will inject content here -->
-                </div>
+                    </div>
             </div>
 
-            <!-- Dashboard Grid -->
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                     <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-4">

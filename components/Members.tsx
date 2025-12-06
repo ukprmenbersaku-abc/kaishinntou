@@ -1,5 +1,5 @@
-import React from 'react';
-import { Code2, ArrowRight, UserPlus } from 'lucide-react';
+import React, { useState } from 'react';
+import { Code2, ArrowRight, UserPlus, LogIn, Loader2, Lock } from 'lucide-react';
 import { members } from '../data/members';
 
 const Members: React.FC = () => {
@@ -7,8 +7,41 @@ const Members: React.FC = () => {
   const candidates = members.filter(m => m.id !== 'userkunn');
   const support = members.find(m => m.id === 'userkunn');
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
   const handleMemberClick = (id: string) => {
     window.location.hash = `#/member/${id}`;
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoggingIn(true);
+    setLoginError(null);
+
+    try {
+      if (window.firebase && window.firebase.auth) {
+        await window.firebase.signInWithEmailAndPassword(
+          window.firebase.auth,
+          email,
+          password
+        );
+        // ログイン成功時、member.htmlへジャンプ
+        window.location.href = '/member.html';
+      } else {
+        throw new Error("Firebase SDK is not initialized");
+      }
+    } catch (err: any) {
+      console.error(err);
+      if (err.code === 'auth/invalid-credential') {
+        setLoginError("メールアドレスまたはパスワードが間違っています。");
+      } else {
+        setLoginError("ログインに失敗しました。");
+      }
+      setIsLoggingIn(false);
+    }
   };
 
   return (
@@ -72,37 +105,104 @@ const Members: React.FC = () => {
           </div>
         )}
 
-        {/* Member Registration Section */}
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 md:p-12 text-center shadow-xl relative overflow-hidden group border border-stone-200">
-            {/* Background decoration (Adjusted for light theme) */}
+        {/* Member Registration & Login Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          
+          {/* Member Registration Section */}
+          <div className="bg-white rounded-3xl p-8 md:p-12 text-center shadow-lg border border-stone-200 relative overflow-hidden flex flex-col justify-center">
+            {/* Background decoration */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500 opacity-5 rounded-full transform translate-x-1/3 -translate-y-1/3"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-500 opacity-5 rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
 
             <div className="relative z-10">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-50 rounded-2xl text-brand-600 mb-6">
                 <UserPlus size={32} />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-stone-900 mb-4">
+              <h3 className="text-2xl font-bold text-stone-900 mb-4">
                 あなたも「改新党」のメンバーに？
               </h3>
-              <p className="text-stone-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-                筑摩野改新党では、学校をより良く変えていくための仲間を募集しています。<br className="hidden md:inline"/>
-                党員限定のコンテンツや、活動への参加など、様々な特典を用意する予定です。<br/>
-                <span className="text-xs text-stone-400 mt-2 block">※現在準備中です。公開をお楽しみに！</span>
+              <p className="text-stone-600 mb-8 leading-relaxed text-sm">
+                筑摩野改新党では、学校をより良く変えていくための仲間を募集しています。<br/>
+                党員限定のコンテンツや特典を用意する予定です。
               </p>
               <a 
                 href="https://forms.gle/Sjb8EQW57J1ZJWNU8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold shadow-lg shadow-brand-100 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                className="inline-flex items-center justify-center px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold shadow-lg shadow-brand-100 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer w-full md:w-auto"
               >
                 党員登録はこちら
                 <ArrowRight size={20} className="ml-2" />
               </a>
             </div>
           </div>
+
+          {/* Login Section */}
+          <div className="bg-stone-900 rounded-3xl p-8 md:p-12 text-center shadow-lg border border-stone-800 relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-stone-700 opacity-20 rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-stone-800 rounded-2xl text-white mb-6">
+                <Lock size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                党員専用ページ
+              </h3>
+              
+              <form onSubmit={handleLogin} className="space-y-4 max-w-sm mx-auto">
+                <div>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-stone-800 border border-stone-700 text-white placeholder-stone-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 text-sm"
+                    placeholder="メールアドレス"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-stone-800 border border-stone-700 text-white placeholder-stone-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 text-sm"
+                    placeholder="パスワード"
+                  />
+                </div>
+
+                {loginError && (
+                  <div className="text-red-400 text-xs text-left flex items-center gap-1">
+                     <span>⚠️</span> {loginError}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isLoggingIn}
+                  className="w-full py-3 bg-white hover:bg-stone-200 text-stone-900 rounded-xl font-bold shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isLoggingIn ? (
+                    <>
+                      <Loader2 className="animate-spin" size={18} />
+                      認証中...
+                    </>
+                  ) : (
+                    <>
+                      ログインしてアクセス
+                      <LogIn size={18} />
+                    </>
+                  )}
+                </button>
+              </form>
+              <p className="text-stone-500 text-xs mt-4">
+                ※党員登録済みのメンバーのみアクセス可能です
+              </p>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );

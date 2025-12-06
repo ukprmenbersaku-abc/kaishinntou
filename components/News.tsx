@@ -45,9 +45,9 @@ const News: React.FC = () => {
           
           {/* Title Section */}
           <div className="w-full text-center flex flex-col items-center">
-            <div className="flex items-center gap-2 mb-2">
-              <Bell className="text-brand-500" size={24} />
-              <h2 className="text-2xl font-bold text-stone-900 tracking-tight">News</h2>
+            <div className="flex items-center gap-3 mb-2">
+              <Bell className="text-brand-500" size={48} />
+              <h2 className="text-5xl md:text-6xl font-bold text-stone-900 tracking-tight">News</h2>
             </div>
             <p className="text-stone-500 text-sm">改新党からの最新情報</p>
           </div>

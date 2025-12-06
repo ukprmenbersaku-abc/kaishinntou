@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>党員専用ページ | 筑摩野改新党</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Zen Maru Gothic"', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#f0fdf4',
+                100: '#dcfce7',
+                200: '#bbf7d0',
+                300: '#86efac',
+                400: '#4ade80',
+                500: '#22c55e',
+                600: '#16a34a',
+                700: '#15803d',
+                800: '#166534',
+                900: '#14532d',
+              }
+            }
+          },
+        },
+      }
+    </script>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+      import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+      // Firebase Config
+      const firebaseConfig = {
+        apiKey: "AIzaSyAnj30NFfZ1_msQmb00mvpG3Mh-i7PgwkA",
+        authDomain: "userkunn-saku.firebaseapp.com",
+        projectId: "userkunn-saku",
+        storageBucket: "userkunn-saku.firebasestorage.app",
+        messagingSenderId: "767449501126",
+        appId: "1:767449501126:web:dc2664153de68f5842f6c7",
+        measurementId: "G-75W3RYLE8N"
+      };
+
+      // Initialize
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      // DOM Elements
+      const loadingScreen = document.getElementById('loading-screen');
+      const contentScreen = document.getElementById('content-screen');
+      const userNameEl = document.getElementById('user-name');
+      const logoutBtn = document.getElementById('logout-btn');
+      const secretContentEl = document.getElementById('secret-content');
+
+      // Check Auth State
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          // Logged in
+          console.log("User is logged in:", user.email);
+          userNameEl.textContent = user.email;
+
+          // Fetch Secret Content (Example)
+          try {
+             // ダミーのテキストを表示（Firestore接続テスト用）
+             // 実際には doc(db, "secrets", "memberOnly") などを取得する
+             secretContentEl.innerHTML = `
+                <div class="p-4 bg-brand-50 border border-brand-100 rounded-lg text-brand-800">
+                    <p class="font-bold mb-2">🎉 認証成功</p>
+                    <p>ようこそ、党員専用エリアへ。<br>現在、限定コンテンツを準備中です。</p>
+                    <p class="text-xs mt-2 text-stone-500">User ID: ${user.uid}</p>
+                </div>
+             `;
+          } catch (e) {
+            console.error("Error fetching data:", e);
+            secretContentEl.textContent = "データの取得に失敗しました。";
+          }
+
+          loadingScreen.classList.add('hidden');
+          contentScreen.classList.remove('hidden');
+        } else {
+          // Not logged in -> Redirect
+          console.log("No user, redirecting...");
+          window.location.href = '/'; 
+        }
+      });
+
+      // Logout Handler
+      logoutBtn.addEventListener('click', () => {
+        signOut(auth).then(() => {
+          window.location.href = '/';
+        });
+      });
+    </script>
+  </head>
+  <body class="bg-stone-100 text-stone-800 min-h-screen">
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-stone-50 z-50 flex items-center justify-center">
+        <div class="flex flex-col items-center gap-4">
+            <div class="animate-spin rounded-full h-12 w-12 border-4 border-brand-200 border-t-brand-600"></div>
+            <p class="text-stone-500 font-bold">認証を確認中...</p>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden by default) -->
+    <div id="content-screen" class="hidden">
+        
+        <!-- Navbar -->
+        <nav class="bg-white border-b border-stone-200 px-6 py-4 flex justify-between items-center sticky top-0 z-40">
+            <div class="flex items-center gap-2">
+                <div class="bg-brand-500 text-white p-1.5 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                </div>
+                <span class="font-bold text-lg text-stone-900">党員専用ページ</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="user-name" class="hidden md:block text-sm text-stone-500"></span>
+                <button id="logout-btn" class="text-sm bg-stone-800 text-white px-4 py-2 rounded-full hover:bg-stone-700 transition-colors">
+                    ログアウト
+                </button>
+            </div>
+        </nav>
+
+        <!-- Content Body -->
+        <main class="max-w-4xl mx-auto px-4 py-12">
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-stone-200 mb-8">
+                <h1 class="text-3xl font-bold text-stone-900 mb-6">Member's Only Content</h1>
+                <p class="text-stone-600 mb-8">
+                    ここには、一般公開されていない党員限定の活動記録や、未公開の資料が表示されます。
+                </p>
+
+                <!-- Dynamic Content Area -->
+                <div id="secret-content" class="space-y-4">
+                    <!-- Javascript will inject content here -->
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">限定資料アーカイブ</h3>
+                    <p class="text-sm text-stone-500">過去の議事録や企画書のドラフトを確認できます。</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-lg flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">次回の予定（先行公開）</h3>
+                    <p class="text-sm text-stone-500">一般公開前のスケジュールを確認できます。</p>
+                </div>
+            </div>
+        </main>
+    </div>
+  </body>
+</html>

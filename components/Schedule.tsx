@@ -26,7 +26,7 @@ const Schedule: React.FC = () => {
         <div className="bg-stone-50 rounded-3xl p-8 border border-stone-100 max-w-2xl mx-auto mb-10 shadow-sm text-left">
           <div className="space-y-4">
             {previewEvents.map((event, index) => (
-              <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+              <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className={`flex flex-col items-center justify-center w-16 h-16 rounded-lg flex-shrink-0 ${event.status === 'done' ? 'bg-stone-100 text-stone-400' : 'bg-brand-50 text-brand-600'}`}>
                    <Calendar size={20} className="mb-1" />
                 </div>

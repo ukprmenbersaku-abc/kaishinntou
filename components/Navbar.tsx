@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex-shrink-0 flex items-center gap-2 group cursor-pointer">
-              <div className="bg-brand-500 text-white p-1.5 rounded-full transition-transform group-hover:rotate-12">
+              <div className="bg-brand-500 text-white p-1.5 rounded-full transition-transform duration-300 group-hover:rotate-12">
                 <Leaf size={24} />
               </div>
               <span className="font-bold text-xl text-stone-800 tracking-wide">筑摩野改新党</span>
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-stone-600 hover:text-brand-600 hover:bg-brand-50 px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer"
+                className="text-stone-600 hover:text-brand-600 hover:bg-brand-50 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 cursor-pointer"
               >
                 {link.name}
               </a>
@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-stone-600 hover:text-brand-600 focus:outline-none p-2"
+              className="text-stone-600 hover:text-brand-600 focus:outline-none p-2 transition-colors duration-300"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-stone-600 hover:text-brand-600 hover:bg-brand-50 block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
+                className="text-stone-600 hover:text-brand-600 hover:bg-brand-50 block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors duration-300"
               >
                 {link.name}
               </a>

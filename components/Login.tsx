@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LogIn, Loader2, Lock, X } from 'lucide-react';
+import { Loader2, Lock, X, Eye, EyeOff } from 'lucide-react';
 
 interface LoginProps {
   isOpen: boolean;
@@ -11,6 +11,7 @@ const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   if (!isOpen) return null;
 
@@ -90,21 +91,31 @@ const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                 value={partyId}
                 onChange={(e) => setPartyId(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 placeholder-stone-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 font-mono"
-                placeholder="例: yamazaki"
+                placeholder=""
                 autoComplete="username"
               />
             </div>
             <div>
               <label className="text-xs font-bold text-stone-400 ml-1 mb-1 block">パスワード</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 placeholder-stone-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300"
-                placeholder="••••••••"
-                autoComplete="current-password"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 placeholder-stone-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all duration-300 pr-12"
+                  placeholder=""
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 text-stone-400 hover:text-stone-600 transition-colors cursor-pointer"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             {loginError && (
@@ -117,7 +128,7 @@ const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3.5 bg-stone-500 hover:bg-stone-600 text-white rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer mt-4"
+              className="w-full py-3.5 bg-stone-400 hover:bg-stone-500 text-white rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer mt-4"
             >
               {isLoggingIn ? (
                 <>
@@ -125,10 +136,7 @@ const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                   認証中...
                 </>
               ) : (
-                <>
-                  ログイン
-                  <LogIn size={18} />
-                </>
+                "ログイン"
               )}
             </button>
           </form>

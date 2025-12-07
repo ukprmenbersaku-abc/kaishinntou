@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Leaf, LogIn } from 'lucide-react';
+import { Menu, X, Leaf } from 'lucide-react';
 import Login from './Login';
 
 interface NavbarProps {
@@ -70,9 +70,8 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               {!user && (
                 <button
                   onClick={handleOpenLogin}
-                  className="flex items-center gap-1.5 bg-stone-500 text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-stone-600 transition-colors shadow-sm ml-2"
+                  className="bg-stone-400 text-white px-5 py-2 rounded-full text-xs font-bold hover:bg-stone-500 transition-colors shadow-sm ml-2"
                 >
-                  <LogIn size={14} />
                   党員ログイン
                 </button>
               )}
@@ -108,9 +107,8 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               {!user && (
                 <button
                   onClick={handleOpenLogin}
-                  className="w-full text-left flex items-center gap-2 text-stone-600 hover:text-brand-600 hover:bg-brand-50 px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors duration-300"
+                  className="w-full text-left block text-stone-600 hover:text-brand-600 hover:bg-brand-50 px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-colors duration-300"
                 >
-                  <LogIn size={18} />
                   党員ログイン
                 </button>
               )}

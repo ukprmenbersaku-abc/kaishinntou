@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Lock, FileText, Calendar, LogOut, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Lock, FileText, Calendar, LogOut, ShieldCheck, ChevronRight, Palette, ExternalLink, Grid } from 'lucide-react';
 
 interface SecretDashboardProps {
   userEmail: string;
@@ -20,16 +20,20 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
           const contentRef = rtdb_ref(rtdb, 'secret_content/message');
           const snapshot = await rtdb_get(contentRef);
 
-          if (snapshot.exists()) {
+          if (snapshot.exists() && snapshot.val()) {
             setMessage(snapshot.val());
           } else {
-            setMessage('現在、党員限定のお知らせはありません。');
+            // データがない場合のデフォルトメッセージ
+            setMessage('今はありません。');
           }
         } catch (err) {
           console.error("Error fetching secret content:", err);
           setError(true);
-          setMessage('データの取得に失敗しました。');
+          setMessage('今はありません。');
         }
+      } else {
+         // プレビュー環境等
+         setMessage('今はありません。');
       }
     };
 
@@ -43,6 +47,59 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
   const goToMeeting = () => {
     window.location.hash = '#/secret/meeting';
   };
+
+  const apps = [
+    {
+      name: 'SQLite Studio',
+      url: 'https://ukpr-sqlite.pages.dev',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 64 64" className="rounded-xl shadow-sm hover:scale-105 transition-transform duration-300">
+          <rect width="64" height="64" rx="16" fill="url(#grad_sqlite)" />
+          <g transform="translate(16, 14)">
+            <ellipse cx="16" cy="6" rx="14" ry="5" fill="none" stroke="white" strokeWidth="3.5" />
+            <path d="M2 6 v 24 a 14 5 0 0 0 28 0 v -24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M2 18 a 14 5 0 0 0 28 0" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+          </g>
+          <defs>
+            <linearGradient id="grad_sqlite" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#6366f1"/>
+              <stop offset="50%" stopColor="#a855f7"/>
+              <stop offset="100%" stopColor="#ec4899"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+    },
+    {
+      name: 'カラーパレットツール',
+      url: 'https://color-palette-tool.pages.dev',
+      icon: (
+        <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-orange-400 rounded-xl flex items-center justify-center text-white shadow-sm hover:scale-105 transition-transform duration-300">
+          <Palette size={28} />
+        </div>
+      )
+    },
+    {
+      name: 'Pix Morph',
+      url: 'https://ukpr-image10.pages.dev',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" className="rounded-xl shadow-sm hover:scale-105 transition-transform duration-300">
+          <defs>
+            <linearGradient id="grad_pix" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#6366f1"/>
+              <stop offset="100%" stopColor="#a855f7"/>
+            </linearGradient>
+          </defs>
+          <rect width="24" height="24" rx="6" fill="url(#grad_pix)"/>
+          <g fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="translate(12 12) scale(0.65) translate(-12 -12)">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+          </g>
+        </svg>
+      )
+    }
+  ];
 
   return (
     // Navbarの高さ分+余白を確保するために pt-28 を設定
@@ -98,7 +155,7 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
         </div>
 
         {/* Action Cards Grid - Light Theme */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           <div 
             onClick={goToArchive}
             className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:shadow-lg hover:border-brand-200 transition-all duration-300 group cursor-pointer relative"
@@ -143,6 +200,37 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
             </div>
           </div>
         </div>
+
+        {/* Recommended Apps Section */}
+        <div>
+           <h3 className="text-stone-500 font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2 border-b border-stone-100 pb-2">
+             <Grid size={16} /> おすすめアプリ
+           </h3>
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {apps.map((app) => (
+                <a 
+                  key={app.name}
+                  href={app.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-200 transition-all duration-300 flex items-center gap-4 group h-full"
+                >
+                  <div className="flex-shrink-0">
+                    {app.icon}
+                  </div>
+                  <div className="flex-grow min-w-0">
+                    <h4 className="font-bold text-stone-800 truncate group-hover:text-brand-600 transition-colors">
+                      {app.name}
+                    </h4>
+                    <div className="text-xs text-stone-400 flex items-center gap-1 mt-1 group-hover:text-brand-400">
+                      開く <ExternalLink size={10} />
+                    </div>
+                  </div>
+                </a>
+              ))}
+           </div>
+        </div>
+
       </div>
     </section>
   );

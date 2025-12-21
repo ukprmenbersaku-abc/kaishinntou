@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, ArrowRight, UserPlus } from 'lucide-react';
+import { Code2, ArrowRight, UserPlus, Users } from 'lucide-react';
 import { members } from '../data/members';
 
 const Members: React.FC = () => {
@@ -9,6 +9,10 @@ const Members: React.FC = () => {
 
   const handleMemberClick = (id: string) => {
     window.location.hash = `#/member/${id}`;
+  };
+
+  const handleAllMembersClick = () => {
+    window.location.hash = '#/members/all';
   };
 
   return (
@@ -22,7 +26,7 @@ const Members: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-10 max-w-4xl mx-auto mb-16">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-10 max-w-4xl mx-auto mb-12">
           {candidates.map((member) => (
             <div 
               key={member.id} 
@@ -48,32 +52,44 @@ const Members: React.FC = () => {
         
         {/* Technical Support Section */}
         {support && (
-          <div className="mt-20 border-t border-stone-200 pt-12 text-center max-w-2xl mx-auto mb-16">
-            <h4 className="text-stone-400 font-bold tracking-widest uppercase text-xs mb-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h4 className="text-stone-400 font-bold tracking-widest uppercase text-xs mb-6">
               Web System & Design Support
             </h4>
             <div 
               onClick={() => handleMemberClick(support.id)}
-              className="group inline-flex items-center gap-6 bg-white px-10 py-6 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300 cursor-pointer hover:-translate-y-1 w-full md:w-auto"
+              className="group inline-flex items-center gap-6 bg-white px-8 py-5 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300 cursor-pointer hover:-translate-y-1 w-full md:w-auto text-left"
             >
-              <div className="p-4 bg-brand-100 rounded-full text-brand-600 transition-colors group-hover:bg-brand-200">
-                <Code2 size={40} />
+              <div className="p-3 bg-stone-100 rounded-full text-stone-500 transition-colors group-hover:bg-brand-100 group-hover:text-brand-600">
+                <Code2 size={24} />
               </div>
-              <div className="text-left flex-grow">
-                <p className="text-sm text-stone-500 font-bold mb-1">技術提供者</p>
+              <div className="flex-grow">
+                <p className="text-xs text-stone-400 font-bold mb-0.5">技術提供者</p>
                 <div className="flex items-center justify-between gap-4">
-                  <p className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight font-sans">
+                  <p className="text-xl font-bold text-stone-800">
                     {support.name}
                   </p>
-                  <ArrowRight size={20} className="text-stone-300 group-hover:text-brand-500 group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight size={16} className="text-stone-300 group-hover:text-brand-500 group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Member Registration Only (Login moved to separate component) */}
-        <div className="max-w-3xl mx-auto">
+        {/* View All Members Button */}
+        <div className="text-center mb-20">
+          <button
+            onClick={handleAllMembersClick}
+            className="group inline-flex items-center justify-center px-8 py-3 bg-white border border-stone-300 text-stone-600 rounded-full font-bold hover:bg-stone-800 hover:text-white hover:border-stone-800 transition-all duration-300 shadow-sm"
+          >
+            <Users size={18} className="mr-2" />
+            すべての役職党員を見る
+            <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Member Registration Only */}
+        <div className="max-w-3xl mx-auto border-t border-stone-200 pt-16">
           <div className="bg-white rounded-3xl p-8 md:p-12 text-center shadow-lg border border-stone-200 relative overflow-hidden flex flex-col justify-center items-center">
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500 opacity-5 rounded-full transform translate-x-1/3 -translate-y-1/3"></div>

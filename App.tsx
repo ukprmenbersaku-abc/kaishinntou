@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import News from './components/News';
+import NewsArchive from './components/NewsArchive';
 import Manifesto from './components/Manifesto';
 import Members from './components/Members';
+import AllMembers from './components/AllMembers';
 import Schedule from './components/Schedule';
 import ScheduleDetail from './components/ScheduleDetail';
 import AiChat from './components/AiChat';
@@ -14,13 +16,14 @@ import MemberDetail from './components/MemberDetail';
 import SecretDashboard from './components/SecretDashboard';
 import SecretArchive from './components/SecretArchive';
 import SecretMeeting from './components/SecretMeeting';
+import SummaryDetail from './components/SummaryDetail';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
 import { Loader2, LockKeyhole } from 'lucide-react';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'schedule' | 'secret-archive' | 'secret-meeting'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -68,6 +71,18 @@ function App() {
         }
       }
 
+      // Check for All Members Route
+      if (hash === '#/members/all') {
+        setCurrentView('all-members');
+        return;
+      }
+
+      // Check for News Archive Route
+      if (hash === '#/news/archive') {
+        setCurrentView('news-archive');
+        return;
+      }
+
       // Check for Secret Routes
       if (hash === '#/secret/archive') {
         setCurrentView('secret-archive');
@@ -87,6 +102,12 @@ function App() {
       // Check for Schedule Detail Route
       if (hash === '#schedule-detail') {
         setCurrentView('schedule');
+        return;
+      }
+
+      // Check for Summary Detail Route
+      if (hash === '#summary-detail') {
+        setCurrentView('summary');
         return;
       }
 
@@ -177,10 +198,6 @@ function App() {
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
       <Navbar user={user} />
       
-      {/* 
-         メインビューかつログイン済みの場合のみダッシュボードを表示
-         （アーカイブ等の詳細ページではダッシュボードは非表示にする）
-      */}
       {user && currentView === 'main' && (
         <SecretDashboard 
           userEmail={user.email} 
@@ -198,7 +215,6 @@ function App() {
           <Schedule />
           <AiChat />
           <section id="support" className="py-24 bg-brand-900 text-white relative overflow-hidden">
-               {/* Simple pattern background */}
                <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
                
                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -236,6 +252,18 @@ function App() {
             onBack={() => window.location.hash = '#members'} 
            />
         </main>
+      ) : currentView === 'all-members' ? (
+        <main>
+          <AllMembers 
+            onBack={() => window.location.hash = '#members'}
+          />
+        </main>
+      ) : currentView === 'news-archive' ? (
+        <main>
+          <NewsArchive 
+            onBack={() => window.location.hash = '#home'}
+          />
+        </main>
       ) : currentView === 'schedule' ? (
         <main>
           <ScheduleDetail
@@ -243,16 +271,20 @@ function App() {
           />
         </main>
       ) : currentView === 'secret-archive' ? (
-        // 認証済みユーザーのみ到達可能
         <main>
           <SecretArchive 
             onBack={() => window.location.hash = '#home'}
           />
         </main>
       ) : currentView === 'secret-meeting' ? (
-        // 認証済みユーザーのみ到達可能
         <main>
           <SecretMeeting
+            onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'summary' ? (
+        <main>
+          <SummaryDetail 
             onBack={() => window.location.hash = '#home'}
           />
         </main>

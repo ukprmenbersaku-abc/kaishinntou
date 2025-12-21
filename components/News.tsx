@@ -1,43 +1,11 @@
 import React from 'react';
-import { Bell, ChevronRight, CalendarClock, FileText } from 'lucide-react';
-
-interface NewsItem {
-  id: string;
-  date: string;
-  category: string;
-  title: string;
-  link: string;
-  icon: React.ElementType;
-}
-
-const newsData: NewsItem[] = [
-  {
-    id: 'n1',
-    date: '2025.12.18',
-    category: 'イベント',
-    title: '生徒総会が開催されます（場所：体育館）',
-    link: '#schedule-detail',
-    icon: CalendarClock
-  },
-  {
-    id: 'n2',
-    date: '2025.12.11',
-    category: 'お知らせ',
-    title: '新入生説明会を実施しました',
-    link: '#schedule-detail',
-    icon: CalendarClock
-  },
-  {
-    id: 'n3',
-    date: '2025.12.04',
-    category: '活動報告',
-    title: '第11回生徒会委員会の議事録を公開予定です',
-    link: '#schedule-detail',
-    icon: FileText
-  }
-];
+import { Bell, ChevronRight } from 'lucide-react';
+import { newsData } from '../data/news';
 
 const News: React.FC = () => {
+  // トップページには最新の3件のみ表示
+  const recentNews = newsData.slice(0, 3);
+
   return (
     <section className="py-12 bg-white border-b border-stone-100">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,14 +23,13 @@ const News: React.FC = () => {
           {/* News List */}
           <div className="w-full">
             <div className="flex flex-col gap-3">
-              {newsData.map((item) => (
+              {recentNews.map((item) => (
                 <a 
                   key={item.id} 
                   href={item.link}
                   className="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-4 rounded-xl bg-stone-50 hover:bg-brand-50/50 border border-stone-100 hover:border-brand-100 transition-all duration-300 cursor-pointer"
                   onClick={(e) => {
-                    // Smooth scroll handle if it's an anchor link
-                    if (item.link.startsWith('#')) {
+                    if (item.link.startsWith('#') && !item.link.startsWith('#/')) {
                       e.preventDefault();
                       window.location.hash = item.link;
                     }
@@ -91,7 +58,10 @@ const News: React.FC = () => {
             </div>
             
             <div className="mt-4 text-right">
-              <a href="#schedule-detail" className="inline-flex items-center text-xs font-bold text-stone-400 hover:text-brand-600 transition-colors duration-300">
+              <a 
+                href="#/news/archive" 
+                className="inline-flex items-center text-xs font-bold text-stone-400 hover:text-brand-600 transition-colors duration-300"
+              >
                 すべてのニュースを見る <ChevronRight size={14} />
               </a>
             </div>

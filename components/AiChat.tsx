@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { HelpCircle, ChevronDown, ChevronUp, Send, Loader2, MessageSquare } from 'lucide-react';
+import { sendMessageToGemini } from '../services/geminiService';
+import { ChatMessage } from '../types';
 
 interface FAQ {
   question: string;
@@ -27,6 +29,55 @@ const faqs: FAQ[] = [
 
 const AiChat: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      role: 'user',
+      text: input.trim()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+
+    try {
+      // 履歴をGemini APIの形式に合わせて抽出
+      const history = messages.map(m => ({ role: m.role, text: m.text }));
+      const aiResponse = await sendMessageToGemini(userMessage.text, history);
+      
+      const botMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'model',
+        text: aiResponse
+      };
+
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: 'model',
+        text: "通信エラーが発生しました。しばらくしてからもう一度お試しください。",
+        isError: true
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section id="qa" className="py-24 bg-white">
@@ -35,13 +86,72 @@ const AiChat: React.FC = () => {
           <div className="inline-flex items-center justify-center w-12 h-12 bg-brand-100 text-brand-600 rounded-full mb-4">
             <HelpCircle size={24} />
           </div>
-          <h3 className="text-3xl md:text-4xl font-bold text-stone-900">よくある質問</h3>
+          <h3 className="text-3xl md:text-4xl font-bold text-stone-900">よくある質問 & AI相談</h3>
           <p className="mt-4 text-stone-500">
-            教室や廊下でよく聞かれる質問をまとめました。
+            教室や廊下でよく聞かれる質問や、AIへの相談はこちらから。
           </p>
         </div>
 
+        {/* AIチャットインターフェースを追加 */}
+        <div className="mb-16 bg-stone-50 rounded-[2rem] border border-stone-200 overflow-hidden shadow-sm">
+          <div className="bg-brand-600 p-4 flex items-center gap-3 text-white">
+            <MessageSquare size={20} />
+            <span className="font-bold">改新党 AIサポーター</span>
+          </div>
+          
+          <div className="h-80 overflow-y-auto p-6 space-y-4 bg-white/50">
+            {messages.length === 0 ? (
+              <div className="text-center py-10 text-stone-400">
+                <p>公約について何でも聞いてください！<br/>「タブレットの規制について詳しく教えて」など</p>
+              </div>
+            ) : (
+              messages.map((msg) => (
+                <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm ${
+                    msg.role === 'user' 
+                      ? 'bg-brand-600 text-white rounded-tr-none' 
+                      : msg.isError ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-white text-stone-800 border border-stone-100 rounded-tl-none'
+                  }`}>
+                    {msg.text}
+                  </div>
+                </div>
+              ))
+            )}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-white border border-stone-100 p-4 rounded-2xl rounded-tl-none flex items-center gap-2 text-stone-400">
+                  <Loader2 size={16} className="animate-spin" />
+                  <span>考え中...</span>
+                </div>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          <div className="p-4 bg-stone-50 border-t border-stone-200 flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+              placeholder="質問を入力してください..."
+              className="flex-grow bg-white border border-stone-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"
+            />
+            <button
+              onClick={handleSend}
+              disabled={isLoading || !input.trim()}
+              className="bg-brand-600 text-white p-2 rounded-xl hover:bg-brand-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Send size={20} />
+            </button>
+          </div>
+        </div>
+
         <div className="space-y-4">
+          <h4 className="text-xl font-bold text-stone-800 mb-6 flex items-center gap-2">
+            <ChevronDown className="text-brand-500" />
+            定番の質問
+          </h4>
           {faqs.map((faq, index) => (
             <div 
               key={index} 

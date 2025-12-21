@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, ErrorInfo } from 'react';
+import React, { Component, ReactNode, ErrorInfo, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -33,14 +33,12 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = {
-      hasError: false,
-      error: null
-    };
-  }
+// Componentを直接継承し、TypeScriptがthis.propsやthis.stateを正しく解決できるように修正
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  public state: ErrorBoundaryState = {
+    hasError: false,
+    error: null
+  };
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
@@ -51,6 +49,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   render() {
+    // 修正: this.state.hasError を参照してエラー時のUIを表示
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-stone-50 p-4">
@@ -76,6 +75,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       );
     }
 
+    // 修正: this.props.children を安全に返却。
+    // React.Component を継承しているため、this.props が型安全に参照可能になります。
     return this.props.children;
   }
 }
@@ -87,11 +88,11 @@ if (!rootElement) {
   try {
     const root = createRoot(rootElement);
     root.render(
-      <React.StrictMode>
+      <StrictMode>
         <ErrorBoundary>
           <App />
         </ErrorBoundary>
-      </React.StrictMode>
+      </StrictMode>
     );
   } catch (error) {
     console.error("Failed to initialize app:", error);

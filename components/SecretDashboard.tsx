@@ -8,7 +8,13 @@ interface SecretDashboardProps {
 }
 
 const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, onLogout }) => {
-  const [message, setMessage] = useState<string>('読み込み中...');
+  // メッセージの定数を定義
+  const welcomeMessage = `皆さん、筑摩野改新党への入党ありがとうございます。
+これから、このサイトを使用し、筑摩野中をよりよくしていきたいと思っています。皆さん、ご協力お願いします。
+（追加日12/14）`;
+
+  // 初期状態としてウェルカムメッセージを設定
+  const [message, setMessage] = useState<string>(welcomeMessage);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,18 +28,13 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
 
           if (snapshot.exists() && snapshot.val()) {
             setMessage(snapshot.val());
-          } else {
-            // データがない場合のデフォルトメッセージ
-            setMessage('今はありません。');
           }
+          // データがない場合は初期値（welcomeMessage）のまま
         } catch (err) {
           console.error("Error fetching secret content:", err);
           setError(true);
-          setMessage('今はありません。');
+          // エラー時も初期値（welcomeMessage）を表示
         }
-      } else {
-         // プレビュー環境等
-         setMessage('今はありません。');
       }
     };
 
@@ -148,7 +149,8 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
               </span>
               党員限定メッセージ
             </h3>
-            <p className={`text-lg leading-relaxed font-medium ${error ? 'text-red-500' : 'text-stone-700'}`}>
+            {/* whitespace-pre-wrap を追加して改行を反映 */}
+            <p className={`text-lg leading-relaxed font-medium whitespace-pre-wrap ${error ? 'text-red-500' : 'text-stone-700'}`}>
               {message}
             </p>
           </div>

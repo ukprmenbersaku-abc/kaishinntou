@@ -31,7 +31,7 @@ const Members: React.FC = () => {
             <div 
               key={member.id} 
               onClick={() => handleMemberClick(member.id)}
-              className="group bg-white rounded-3xl p-8 md:p-10 text-center shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100 flex flex-col h-full hover:-translate-y-1 cursor-pointer relative"
+              className="group bg-white rounded-3xl p-8 md:p-10 text-center shadow-sm hover:shadow-md transition-all duration-300 border border-stone-200 hover:border-stone-400 flex flex-col h-full cursor-pointer relative"
             >
               <div className="mb-6">
                 <h4 className="text-4xl md:text-5xl font-bold text-stone-900 mb-4">{member.name}</h4>
@@ -58,7 +58,7 @@ const Members: React.FC = () => {
             </h4>
             <div 
               onClick={() => handleMemberClick(support.id)}
-              className="group inline-flex items-center gap-6 bg-white px-8 py-5 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300 cursor-pointer hover:-translate-y-1 w-full md:w-auto text-left"
+              className="group inline-flex items-center gap-6 bg-white px-8 py-5 rounded-2xl shadow-sm border border-stone-200 hover:border-stone-400 hover:shadow-md transition-all duration-300 cursor-pointer w-full md:w-auto text-left"
             >
               <div className="p-3 bg-stone-100 rounded-full text-stone-500 transition-colors group-hover:bg-brand-100 group-hover:text-brand-600">
                 <Code2 size={24} />
@@ -80,7 +80,7 @@ const Members: React.FC = () => {
         <div className="text-center mb-20">
           <button
             onClick={handleAllMembersClick}
-            className="group inline-flex items-center justify-center px-8 py-3 bg-white border border-stone-300 text-stone-600 rounded-full font-bold hover:bg-stone-800 hover:text-white hover:border-stone-800 transition-all duration-300 shadow-sm"
+            className="group inline-flex items-center justify-center px-8 py-3 bg-white border border-stone-300 text-stone-600 rounded-full font-bold hover:bg-stone-100 hover:text-stone-800 hover:border-stone-400 transition-all duration-300 shadow-sm"
           >
             <Users size={18} className="mr-2" />
             すべての役職党員を見る
@@ -109,10 +109,10 @@ const Members: React.FC = () => {
                 href="https://forms.gle/Sjb8EQW57J1ZJWNU8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold shadow-lg shadow-brand-100 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer w-full md:w-auto"
+                className="group inline-flex items-center justify-center px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold shadow-lg shadow-brand-100 transition-all duration-300 cursor-pointer w-full md:w-auto"
               >
                 党員登録はこちら
-                <ArrowRight size={20} className="ml-2" />
+                <ArrowRight size={20} className="ml-2 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
           </div>

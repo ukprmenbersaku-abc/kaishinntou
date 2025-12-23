@@ -34,7 +34,7 @@ interface ErrorBoundaryState {
 }
 
 // Componentを直接継承し、TypeScriptがthis.propsやthis.stateを正しく解決できるように修正
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
@@ -79,7 +79,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     }
 
     // 修正: this.props.children を安全に返却。
-    // React.Component を継承しているため、this.props が型安全に参照可能になります。
+    // Componentを継承しているため、this.propsが型安全に参照可能になります。
     return this.props.children;
   }
 }

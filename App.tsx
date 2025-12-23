@@ -8,7 +8,6 @@ import Members from './components/Members';
 import AllMembers from './components/AllMembers';
 import Schedule from './components/Schedule';
 import ScheduleDetail from './components/ScheduleDetail';
-import AiChat from './components/AiChat';
 import Footer from './components/Footer';
 import PolicyDetail from './components/PolicyDetail';
 import ElectionDetail from './components/ElectionDetail';
@@ -21,7 +20,7 @@ import PersonnelChangeNews from './components/PersonnelChangeNews';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
-import { Loader2, LockKeyhole } from 'lucide-react';
+import { Loader2, LockKeyhole, ArrowRight } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change'>('main');
@@ -220,7 +219,6 @@ function App() {
           <Manifesto />
           <Members />
           <Schedule />
-          <AiChat />
           <section id="support" className="py-24 bg-brand-900 text-white relative overflow-hidden">
                <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
                
@@ -238,9 +236,10 @@ function App() {
                     href="https://forms.gle/unGfDqs9yaEQTcNMA"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-100 transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+                    className="group inline-flex items-center justify-center bg-white text-brand-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-stone-50 transition-all duration-300 cursor-pointer"
                   >
                     意見・質問・要望はこちらから
+                    <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </a>
                </div>
           </section>

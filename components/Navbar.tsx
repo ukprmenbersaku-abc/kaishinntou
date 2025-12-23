@@ -15,7 +15,6 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
     { name: '公約', href: '#manifesto' },
     { name: '主要党員', href: '#members' },
     { name: 'スケジュール', href: '#schedule' },
-    { name: 'Q&A', href: '#qa' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

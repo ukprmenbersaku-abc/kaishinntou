@@ -16,8 +16,8 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
     window.location.hash = `#/member/${id}`;
   };
 
-  // 統計データ（動的計算）
-  const totalMembers = members.length;
+  // 統計データ
+  const totalMembers = 12; // 現在の党員数
   const officersCount = members.filter(m => m.id !== 'userkunn').length;
 
   return (
@@ -49,7 +49,7 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
                   <span>ORGANIZATION</span>
                 </div>
                 <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-stone-900">
-                  筑摩野改新党<br/>組織・党員一覧
+                  筑摩野改新党<br/>役職党員
                 </h1>
                 <p className="text-stone-600 font-medium">
                   令和八年度 新体制メンバー<br className="md:hidden"/>
@@ -99,23 +99,6 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
                 className="group bg-white border border-stone-200 rounded-3xl p-6 md:p-8 hover:shadow-lg hover:border-brand-200 transition-all duration-300 cursor-pointer relative overflow-hidden"
               >
                 <div className="flex flex-col md:flex-row gap-6 md:items-center">
-                  {/* Avatar / Role */}
-                  <div className="flex-shrink-0 flex flex-col items-center md:items-start gap-4">
-                    <div className={`w-20 h-20 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-inner ${
-                       member.id === 'userkunn' ? 'bg-stone-800 text-white' : 
-                       member.id.startsWith('m') ? (member.color.includes('brand') ? 'bg-brand-100 text-brand-600' : 
-                                                    member.color.includes('blue') ? 'bg-blue-100 text-blue-600' :
-                                                    member.color.includes('rose') ? 'bg-rose-100 text-rose-600' :
-                                                    member.color.includes('emerald') ? 'bg-emerald-100 text-emerald-600' :
-                                                    member.color.includes('purple') ? 'bg-purple-100 text-purple-600' :
-                                                    member.color.includes('indigo') ? 'bg-indigo-100 text-indigo-600' :
-                                                    'bg-orange-100 text-orange-600') 
-                                                 : 'bg-stone-100 text-stone-600'
-                    }`}>
-                      {member.name.substring(0, 1)}
-                    </div>
-                  </div>
-
                   {/* Content */}
                   <div className="flex-grow text-center md:text-left">
                     <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold border mb-2 ${member.color}`}>

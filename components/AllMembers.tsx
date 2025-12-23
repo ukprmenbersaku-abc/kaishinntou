@@ -16,12 +16,9 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
     window.location.hash = `#/member/${id}`;
   };
 
-  // 統計データ（ユーザー指定に基づく）
-  const stats = {
-    total: 12,     // 総数
-    officers: 6,   // 役員数
-    supporters: 6  // 残り（サポーター等）
-  };
+  // 統計データ（動的計算）
+  const totalMembers = members.length;
+  const officersCount = members.filter(m => m.id !== 'userkunn').length;
 
   return (
     <div className="min-h-screen bg-white pt-24 pb-12">
@@ -38,7 +35,6 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
         </button>
 
         {/* Header & Stats */}
-        {/* 黒背景(bg-stone-900)から、明るいブランドカラー系に変更 */}
         <div className="bg-brand-50 rounded-[2.5rem] p-8 md:p-12 mb-12 text-stone-900 relative overflow-hidden shadow-sm border border-brand-100">
           {/* Background Decor */}
           <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none text-brand-600">
@@ -56,17 +52,16 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
                   筑摩野改新党<br/>組織・党員一覧
                 </h1>
                 <p className="text-stone-600 font-medium">
-                  学校を変えるために集まった、<br className="md:hidden"/>
-                  志あるメンバーたち。
+                  令和八年度 新体制メンバー<br className="md:hidden"/>
                 </p>
               </div>
 
-              {/* Stats Counter - 色使いを調整 */}
+              {/* Stats Counter */}
               <div className="flex gap-6 md:gap-10 bg-white p-6 rounded-2xl shadow-sm border border-brand-100">
                 <div>
                   <div className="text-xs text-stone-400 font-bold uppercase tracking-wider mb-1">Total Members</div>
                   <div className="text-4xl font-bold text-stone-800 flex items-end gap-1">
-                    {stats.total}
+                    {totalMembers}
                     <span className="text-lg font-medium text-stone-400 mb-1">名</span>
                   </div>
                 </div>
@@ -74,14 +69,14 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
                 <div>
                   <div className="text-xs text-stone-400 font-bold uppercase tracking-wider mb-1">Officers</div>
                   <div className="text-4xl font-bold text-brand-600 flex items-end gap-1">
-                    {stats.officers}
+                    {officersCount}
                     <span className="text-lg font-medium text-stone-400 mb-1">名</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Recruitment Indicator - アイコン変更 */}
+            {/* Recruitment Indicator */}
             <div className="mt-8 flex items-center gap-2 text-sm text-brand-700 bg-white inline-flex px-4 py-2 rounded-full border border-brand-200 shadow-sm font-bold">
               <UserPlus size={18} />
               <span>現在も賛同者を募集中です</span>
@@ -112,6 +107,8 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
                                                     member.color.includes('blue') ? 'bg-blue-100 text-blue-600' :
                                                     member.color.includes('rose') ? 'bg-rose-100 text-rose-600' :
                                                     member.color.includes('emerald') ? 'bg-emerald-100 text-emerald-600' :
+                                                    member.color.includes('purple') ? 'bg-purple-100 text-purple-600' :
+                                                    member.color.includes('indigo') ? 'bg-indigo-100 text-indigo-600' :
                                                     'bg-orange-100 text-orange-600') 
                                                  : 'bg-stone-100 text-stone-600'
                     }`}>

@@ -1,4 +1,4 @@
-import { CalendarClock, Mic, Bell, Info } from 'lucide-react';
+import { CalendarClock, Mic, Bell, Info, UserCog } from 'lucide-react';
 import React from 'react';
 
 export interface NewsItem {
@@ -11,6 +11,14 @@ export interface NewsItem {
 }
 
 export const newsData: NewsItem[] = [
+  {
+    id: 'n_personnel_20251222',
+    date: '2025.12.22',
+    category: 'お知らせ',
+    title: '【重要】役員人事の変更について',
+    link: '#news/personnel-change',
+    icon: UserCog
+  },
   {
     id: 'n0',
     date: '2025.12.21',

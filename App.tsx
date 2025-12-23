@@ -17,13 +17,14 @@ import SecretDashboard from './components/SecretDashboard';
 import SecretArchive from './components/SecretArchive';
 import SecretMeeting from './components/SecretMeeting';
 import SummaryDetail from './components/SummaryDetail';
+import PersonnelChangeNews from './components/PersonnelChangeNews';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
 import { Loader2, LockKeyhole } from 'lucide-react';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -80,6 +81,12 @@ function App() {
       // Check for News Archive Route
       if (hash === '#/news/archive') {
         setCurrentView('news-archive');
+        return;
+      }
+
+      // Check for Personnel Change News Route
+      if (hash === '#news/personnel-change') {
+        setCurrentView('news-personnel-change');
         return;
       }
 
@@ -285,6 +292,12 @@ function App() {
       ) : currentView === 'summary' ? (
         <main>
           <SummaryDetail 
+            onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'news-personnel-change' ? (
+        <main>
+          <PersonnelChangeNews
             onBack={() => window.location.hash = '#home'}
           />
         </main>

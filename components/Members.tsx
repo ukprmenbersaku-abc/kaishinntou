@@ -3,8 +3,8 @@ import { Code2, ArrowRight, UserPlus, Users } from 'lucide-react';
 import { members } from '../data/members';
 
 const Members: React.FC = () => {
-  // 候補者（userkunn以外）と技術者（userkunn）を分離
-  const candidates = members.filter(m => m.id !== 'userkunn');
+  // トップページには岩本(m1)とS(m2)のみを表示
+  const candidates = members.filter(m => m.id === 'm1' || m.id === 'm2');
   const support = members.find(m => m.id === 'userkunn');
 
   const handleMemberClick = (id: string) => {
@@ -35,7 +35,7 @@ const Members: React.FC = () => {
             >
               <div className="mb-6">
                 <h4 className="text-4xl md:text-5xl font-bold text-stone-900 mb-4">{member.name}</h4>
-                <div className="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 font-bold text-sm md:text-base border border-brand-100">
+                <div className={`inline-block px-4 py-1.5 rounded-full font-bold text-sm md:text-base border border-opacity-20 ${member.color}`}>
                   {member.role}
                 </div>
               </div>

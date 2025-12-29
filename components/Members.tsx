@@ -1,11 +1,13 @@
 import React from 'react';
-import { Code2, ArrowRight, UserPlus, Users } from 'lucide-react';
+import { Code2, ArrowRight, UserPlus, Users, Laptop } from 'lucide-react';
 import { members } from '../data/members';
 
 const Members: React.FC = () => {
   // トップページには岩本(m1)とS(m2)のみを表示
   const candidates = members.filter(m => m.id === 'm1' || m.id === 'm2');
-  const support = members.find(m => m.id === 'userkunn');
+  
+  // 技術サポートメンバー (userkunn と S)
+  const techSupportMembers = members.filter(m => m.id === 'userkunn' || m.id === 'm2');
 
   const handleMemberClick = (id: string) => {
     window.location.hash = `#/member/${id}`;
@@ -51,27 +53,34 @@ const Members: React.FC = () => {
         </div>
         
         {/* Technical Support Section */}
-        {support && (
-          <div className="text-center max-w-2xl mx-auto mb-12">
+        {techSupportMembers.length > 0 && (
+          <div className="text-center max-w-4xl mx-auto mb-12">
             <h4 className="text-stone-400 font-bold tracking-widest uppercase text-xs mb-6">
               Web System & Design Support
             </h4>
-            <div 
-              onClick={() => handleMemberClick(support.id)}
-              className="group inline-flex items-center gap-6 bg-white px-8 py-5 rounded-2xl shadow-sm border border-stone-200 hover:border-stone-400 hover:shadow-md transition-all duration-300 cursor-pointer w-full md:w-auto text-left"
-            >
-              <div className="p-3 bg-stone-100 rounded-full text-stone-500 transition-colors group-hover:bg-brand-100 group-hover:text-brand-600">
-                <Code2 size={24} />
-              </div>
-              <div className="flex-grow">
-                <p className="text-xs text-stone-400 font-bold mb-0.5">技術提供者</p>
-                <div className="flex items-center justify-between gap-4">
-                  <p className="text-xl font-bold text-stone-800">
-                    {support.name}
-                  </p>
-                  <ArrowRight size={16} className="text-stone-300 group-hover:text-brand-500 group-hover:translate-x-1 transition-all duration-300" />
+            <div className="grid md:grid-cols-2 gap-4">
+              {techSupportMembers.map((support) => (
+                <div 
+                  key={support.id}
+                  onClick={() => handleMemberClick(support.id)}
+                  className="group flex items-center gap-4 bg-white px-6 py-4 rounded-2xl shadow-sm border border-stone-200 hover:border-stone-400 hover:shadow-md transition-all duration-300 cursor-pointer text-left"
+                >
+                  <div className={`p-3 rounded-full transition-colors ${support.id === 'userkunn' ? 'bg-stone-100 text-stone-500 group-hover:bg-brand-100 group-hover:text-brand-600' : 'bg-blue-50 text-blue-500 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
+                    {support.id === 'userkunn' ? <Code2 size={24} /> : <Laptop size={24} />}
+                  </div>
+                  <div className="flex-grow">
+                    <p className="text-xs text-stone-400 font-bold mb-0.5">
+                      {support.id === 'userkunn' ? 'System / Design' : 'Infrastructure / Logic'}
+                    </p>
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-lg font-bold text-stone-800">
+                        {support.name}
+                      </p>
+                      <ArrowRight size={16} className="text-stone-300 group-hover:text-stone-600 group-hover:translate-x-1 transition-all duration-300" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         )}

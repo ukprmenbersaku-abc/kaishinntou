@@ -17,15 +17,16 @@ import SecretArchive from './components/SecretArchive';
 import SecretMeeting from './components/SecretMeeting';
 import SummaryDetail from './components/SummaryDetail';
 import PersonnelChangeNews from './components/PersonnelChangeNews';
+import CountdownNotice from './components/CountdownNotice';
 import CountdownOverlay from './components/CountdownOverlay'; 
-import NewYearGreeting from './components/NewYearGreeting'; // Import NewYearGreeting
+import NewYearGreeting from './components/NewYearGreeting';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
 import { Loader2, LockKeyhole, ArrowRight } from 'lucide-react';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'news-countdown' | 'new-year-greeting'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -85,6 +86,12 @@ function App() {
       // Check for News Archive Route
       if (hash === '#/news/archive') {
         setCurrentView('news-archive');
+        return;
+      }
+
+      // Check for Countdown Notice Route
+      if (hash === '#/news/countdown') {
+        setCurrentView('news-countdown');
         return;
       }
 
@@ -214,7 +221,6 @@ function App() {
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
       {/* カウントダウンオーバーレイ: 条件を満たした時のみ表示されます */}
-      {/* onNewYearコールバックを渡し、年明け状態を同期させます */}
       <CountdownOverlay onNewYear={() => setIsNewYear(true)} />
       
       <Navbar user={user} />
@@ -230,7 +236,6 @@ function App() {
       {currentView === 'main' ? (
         <main>
           <Hero />
-          {/* isNewYearステートを渡すことで、テストモード時もニュースを表示可能にします */}
           <News isNewYear={isNewYear} />
           <Manifesto />
           <Members />
@@ -313,6 +318,12 @@ function App() {
       ) : currentView === 'news-personnel-change' ? (
         <main>
           <PersonnelChangeNews
+            onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'news-countdown' ? (
+        <main>
+          <CountdownNotice
             onBack={() => window.location.hash = '#home'}
           />
         </main>

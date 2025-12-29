@@ -21,7 +21,7 @@ const News: React.FC<NewsProps> = ({ isNewYear = false }) => {
       id: 'ny_2026',
       date: '2026.01.01',
       category: 'お知らせ',
-      title: '新年あけましておめでとうございます。',
+      title: '新年あけましておめでとうございます',
       link: '#/news/new-year', // 専用ページへのリンクに変更
       icon: Sparkles
     };

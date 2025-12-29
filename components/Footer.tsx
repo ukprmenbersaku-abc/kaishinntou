@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
         </p>
         <div className="text-xs text-stone-600 flex flex-col items-center gap-2">
           <p>&copy; 2025 Chikumano Kaishin Party.</p>
-          <p className="opacity-50">Technical Support: userkunn</p>
-          <p className="opacity-50">thank you for google ai studio</p>
+          <p className="opacity-50">Technical Support: userkunn & S</p>
+          <p className="opacity-50">thank you for Google AI Studio, Firebase, Cloudflare</p>
         </div>
       </div>
     </footer>

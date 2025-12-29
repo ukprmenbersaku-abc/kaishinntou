@@ -1,4 +1,4 @@
-import { CalendarClock, Mic, Bell, Info, UserCog } from 'lucide-react';
+import { CalendarClock, Mic, Bell, Info, UserCog, Clock } from 'lucide-react';
 import React from 'react';
 
 export interface NewsItem {
@@ -11,6 +11,14 @@ export interface NewsItem {
 }
 
 export const newsData: NewsItem[] = [
+  {
+    id: 'n_countdown_notice',
+    date: '2025.12.28',
+    category: 'イベント',
+    title: '【予告】公式サイトにて「年越しカウントダウン」を実施します',
+    link: '#/news/countdown',
+    icon: Clock
+  },
   {
     id: 'n_personnel_20251222',
     date: '2025.12.22',

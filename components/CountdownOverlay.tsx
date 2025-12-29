@@ -14,9 +14,6 @@ const CountdownOverlay: React.FC<CountdownOverlayProps> = ({ onNewYear }) => {
   // ユーザーが手動で閉じたかどうかのフラグ
   const [isDismissed, setIsDismissed] = useState(false);
   
-  // テスト用：システム時刻とテスト開始時刻の差分を保持
-  const timeOffsetRef = useRef<number | null>(null);
-
   // onNewYearの発火済みフラグ
   const hasTriggeredNewYear = useRef(false);
 
@@ -25,36 +22,8 @@ const CountdownOverlay: React.FC<CountdownOverlayProps> = ({ onNewYear }) => {
       // ユーザーが閉じた場合は再表示しない
       if (isDismissed) return;
 
-      // --------------------------------------------------------------------------
-      // 【テストモード有効中】
-      // ページ読み込み時に「12月31日 23時59分30秒」からスタートし、
-      // その後はリアルタイムに時が進むようにシミュレーションします。
-      // --------------------------------------------------------------------------
-      
-      // まだオフセットが計算されていなければ計算（初回実行時）
-      if (timeOffsetRef.current === null) {
-        const nowReal = new Date();
-        const testStart = new Date();
-        // テスト開始日時を設定: 今年の12月31日 23:59:30
-        testStart.setFullYear(nowReal.getFullYear()); 
-        testStart.setMonth(11);   // 12月
-        testStart.setDate(31);
-        testStart.setHours(23);
-        testStart.setMinutes(59);
-        testStart.setSeconds(30);
-        testStart.setMilliseconds(0);
-        
-        // 差分を保存
-        timeOffsetRef.current = testStart.getTime() - nowReal.getTime();
-      }
-
-      // 現在のシミュレーション時刻 = 実時間 + オフセット
-      const now = new Date(Date.now() + (timeOffsetRef.current || 0));
-
-      // --------------------------------------------------------------------------
-      // 本番用コード（テスト時はコメントアウト）
-      // const now = new Date();
-      // --------------------------------------------------------------------------
+      // 現在時刻を取得（本番モード）
+      const now = new Date();
 
       const month = now.getMonth() + 1; // 1-12
       const date = now.getDate();

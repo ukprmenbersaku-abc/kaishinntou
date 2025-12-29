@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Sparkles, Send } from 'lucide-react';
+import { ArrowLeft, Sparkles, Send, Sun } from 'lucide-react';
 
 interface NewYearGreetingProps {
   onBack: () => void;
@@ -11,75 +11,98 @@ const NewYearGreeting: React.FC<NewYearGreetingProps> = ({ onBack }) => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-stone-900 text-white pt-24 pb-12 relative overflow-hidden font-sans">
-        {/* Background effects */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl mix-blend-screen animate-pulse"></div>
-             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl mix-blend-screen animate-pulse delay-1000"></div>
+    <div className="min-h-screen bg-stone-900 text-stone-800 pt-24 pb-12 relative overflow-hidden font-sans">
+        {/* Decorative Background for "Omedetai" feeling */}
+        <div className="absolute inset-0 bg-[#fbfaf5]">
+            {/* Japanese Traditional Pattern-ish CSS */}
+            <div className="absolute top-0 left-0 w-full h-full opacity-5" 
+                style={{backgroundImage: 'radial-gradient(#d97706 2px, transparent 2px)', backgroundSize: '30px 30px'}}>
+            </div>
+            <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-red-500 rounded-bl-full opacity-5 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-[40vw] h-[40vh] bg-gold-500 rounded-tr-full opacity-5 pointer-events-none"></div>
         </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Navigation */}
         <button 
           onClick={onBack}
-          className="group flex items-center text-stone-400 hover:text-white mb-8 transition-colors duration-300"
+          className="group flex items-center text-stone-500 hover:text-stone-800 mb-8 transition-colors duration-300"
         >
-          <div className="bg-white/10 p-2 rounded-full mr-3 group-hover:bg-white/20 transition-colors duration-300">
+          <div className="bg-white border border-stone-200 p-2 rounded-full mr-3 group-hover:bg-red-50 group-hover:text-red-600 transition-colors duration-300">
             <ArrowLeft size={20} />
           </div>
           <span className="font-bold">ホームに戻る</span>
         </button>
 
-        <div className="text-center py-12 md:py-24">
-            <div className="inline-flex items-center justify-center p-4 bg-yellow-500/20 rounded-full text-yellow-400 mb-8 shadow-[0_0_30px_rgba(234,179,8,0.3)]">
-                <Sparkles size={48} />
-            </div>
+        <div className="text-center py-8 md:py-16">
+            
+            {/* Main Greeting Card */}
+            <div className="bg-white p-2 md:p-4 rounded-[3rem] shadow-2xl relative overflow-hidden max-w-3xl mx-auto">
+                {/* Gold Frame */}
+                <div className="border-4 border-double border-yellow-500 rounded-[2.5rem] p-8 md:p-12 relative">
+                    
+                    {/* Rising Sun Icon */}
+                    <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-red-500 opacity-20">
+                        <Sun size={120} />
+                    </div>
 
-            <h1 className="text-4xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 pb-2">
-                    Happy New Year
-                </span>
-                <span className="text-3xl md:text-5xl text-white mt-4 block font-medium">
-                    2026
-                </span>
-            </h1>
+                    <div className="relative z-10">
+                        <div className="inline-flex items-center justify-center p-3 bg-red-100 text-red-600 rounded-full mb-6">
+                            <span className="text-xs font-bold tracking-widest uppercase px-2">Happy New Year</span>
+                        </div>
 
-            <div className="max-w-2xl mx-auto bg-white/5 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl">
-                <p className="text-lg md:text-xl leading-relaxed text-stone-300 mb-8 font-medium">
-                    新年あけましておめでとうございます。<br/>
-                    旧年中は筑摩野改新党への温かいご支援、誠にありがとうございました。
-                </p>
-                <div className="w-16 h-0.5 bg-yellow-500/50 mx-auto mb-8"></div>
-                <p className="text-lg md:text-xl leading-relaxed text-stone-300 mb-8">
-                    2026年は、公約実現の「実行の年」です。<br/>
-                    「聴く学校」から「動く学校」へ。<br/>
-                    皆さんと共に、新しい学校生活を築いていけることを楽しみにしています。
-                </p>
-                <p className="text-lg md:text-xl leading-relaxed text-stone-300">
-                    本年もどうぞよろしくお願い申し上げます。
-                </p>
+                        <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight text-stone-900">
+                            謹賀新年
+                            <span className="block text-2xl md:text-3xl text-yellow-600 mt-4 font-bold tracking-[0.2em]">
+                                2026
+                            </span>
+                        </h1>
 
-                <div className="mt-12 text-right border-t border-white/10 pt-6">
-                    <p className="font-bold text-lg text-stone-400">筑摩野改新党 代表</p>
-                    <p className="font-bold text-2xl text-white mt-1 font-serif tracking-widest">岩本 宗祐</p>
+                        <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-yellow-500 mx-auto mb-10 rounded-full"></div>
+
+                        <div className="space-y-6 text-lg md:text-xl font-medium text-stone-600 leading-loose">
+                            <p>
+                                明けましておめでとうございます。<br/>
+                                旧年中は筑摩野改新党への温かいご支援、<br className="hidden md:inline"/>誠にありがとうございました。
+                            </p>
+                            <p>
+                                2026年は、公約実現の「実行の年」です。<br/>
+                                「聴く学校」から「動く学校」へ。<br/>
+                                皆さんと共に、新しい学校生活を<br className="hidden md:inline"/>築いていけることを楽しみにしています。
+                            </p>
+                            <p>
+                                本年もどうぞよろしくお願い申し上げます。
+                            </p>
+                        </div>
+
+                        <div className="mt-12 pt-8 border-t border-stone-100 flex flex-col items-center">
+                            <p className="font-bold text-sm text-stone-400 mb-2">筑摩野改新党 代表</p>
+                            {/* Font changed to sans-serif (Zen Maru Gothic) per request */}
+                            <p className="font-bold text-3xl text-stone-900 font-sans tracking-widest">岩本 宗祐</p>
+                             <div className="flex gap-4 mt-6">
+                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div className="w-3 h-3 rounded-full bg-white border border-stone-200"></div>
+                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                             </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
              {/* Message CTA */}
-             <div className="mt-16 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
-                  <p className="text-stone-400 mb-6 font-bold">新年の抱負や要望をお聞かせください</p>
+             <div className="mt-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+                  <p className="text-stone-500 mb-6 font-bold">新年の抱負や要望をお聞かせください</p>
                   <a
                     href="https://forms.gle/unGfDqs9yaEQTcNMA"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 bg-white text-stone-900 px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition-all duration-300 shadow-lg shadow-white/10 hover:shadow-yellow-400/50 transform hover:-translate-y-1"
+                    className="group inline-flex items-center gap-2 bg-stone-900 text-white px-8 py-4 rounded-full font-bold hover:bg-red-600 transition-all duration-300 shadow-lg hover:shadow-red-200 transform hover:-translate-y-1"
                   >
                     <Send size={18} className="group-hover:translate-x-1 transition-transform" />
                     メッセージを送る
                   </a>
              </div>
         </div>
-
       </div>
     </div>
   );

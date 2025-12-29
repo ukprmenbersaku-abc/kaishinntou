@@ -84,7 +84,7 @@ export const members: Member[] = [
     role: 'Technical Support',
     bio: 'Web System & Design Supportを担当。',
     image: 'images/userkunn.png',
-    detailBio: 'どうも。党内で唯一、顔出しNGの「影の技術担当」、userkunn（匿名）です。候補者の S？ああ、彼にPCとデジタルのイロハを叩き込んだのは、他でもない私です。言ってしまえば、彼というハードウェアには、私の作った「最強のOS」がインストールされています。私は普段、**「VS Codeのソースコード改造」や「Web3ドメインによる独自経済圏の構築」**など、世界中のエンジニアが使うツールを裏で作っています。',
+    detailBio: 'どうも。党内で唯一、顔出しNGの「影の技術担当」、userkunn（匿名）です。私は普段、**「VS Codeのソースコード改造」や「Web3ドメインによる独自経済圏の構築」**など、世界中のエンジニアが使うツールを裏で作っています。',
     message: 'この度、その技術力をこの学校に向けることにしました。私「userkunn」の目的はシンプルです。この学校の「バグ（古い校則や慣習）」を徹底的にデバッグし、快適な環境へと「神アプデ」すること。口先だけではありません。すべて「技術（テクノロジー）」で解決します。変化を恐れない人は、我々に投票してください。……というか、面白い未来が見たいなら、入れるしかないですよね？（圧）',
     tags: ['#FullStackDev', '#Design', '#ShadowSupporter', '#CodeIsLife'],
     color: 'bg-stone-100 text-stone-600'

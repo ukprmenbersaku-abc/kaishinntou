@@ -99,7 +99,7 @@ const AllMembers: React.FC<AllMembersProps> = ({ onBack }) => {
                 className="group bg-white border border-stone-200 rounded-3xl p-6 md:p-8 hover:shadow-lg hover:border-brand-200 transition-all duration-300 cursor-pointer relative overflow-hidden"
               >
                 <div className="flex flex-col md:flex-row gap-6 md:items-center">
-                  {/* Content */}
+                  {/* Content - アイコン削除済み */}
                   <div className="flex-grow text-center md:text-left">
                     <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold border mb-2 ${member.color}`}>
                       {member.role}

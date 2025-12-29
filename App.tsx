@@ -17,19 +17,24 @@ import SecretArchive from './components/SecretArchive';
 import SecretMeeting from './components/SecretMeeting';
 import SummaryDetail from './components/SummaryDetail';
 import PersonnelChangeNews from './components/PersonnelChangeNews';
+import CountdownOverlay from './components/CountdownOverlay'; 
+import NewYearGreeting from './components/NewYearGreeting'; // Import NewYearGreeting
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
 import { Loader2, LockKeyhole, ArrowRight } from 'lucide-react';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
   // Auth State
   const [user, setUser] = useState<any>(null);
   const [authInitialized, setAuthInitialized] = useState(false);
+
+  // New Year State (テスト用/本番用共通: カウントダウン完了通知)
+  const [isNewYear, setIsNewYear] = useState(false);
 
   useEffect(() => {
     // Firebase Auth Listener
@@ -80,6 +85,12 @@ function App() {
       // Check for News Archive Route
       if (hash === '#/news/archive') {
         setCurrentView('news-archive');
+        return;
+      }
+
+      // Check for New Year Greeting Route
+      if (hash === '#/news/new-year') {
+        setCurrentView('new-year-greeting');
         return;
       }
 
@@ -202,6 +213,10 @@ function App() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
+      {/* カウントダウンオーバーレイ: 条件を満たした時のみ表示されます */}
+      {/* onNewYearコールバックを渡し、年明け状態を同期させます */}
+      <CountdownOverlay onNewYear={() => setIsNewYear(true)} />
+      
       <Navbar user={user} />
       
       {user && currentView === 'main' && (
@@ -215,7 +230,8 @@ function App() {
       {currentView === 'main' ? (
         <main>
           <Hero />
-          <News />
+          {/* isNewYearステートを渡すことで、テストモード時もニュースを表示可能にします */}
+          <News isNewYear={isNewYear} />
           <Manifesto />
           <Members />
           <Schedule />
@@ -298,6 +314,12 @@ function App() {
         <main>
           <PersonnelChangeNews
             onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'new-year-greeting' ? (
+        <main>
+          <NewYearGreeting 
+             onBack={() => window.location.hash = '#home'}
           />
         </main>
       ) : (

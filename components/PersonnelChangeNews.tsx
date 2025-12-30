@@ -11,16 +11,16 @@ const PersonnelChangeNews: React.FC<PersonnelChangeNewsProps> = ({ onBack }) => 
   }, []);
 
   const appointments = [
-    { role: '幹事長', name: '大杉 莉菜', type: 'new' },
-    { role: '幹事長代行', name: '三森 祐空', type: 'new' },
-    { role: '政調会長', name: '高野 健人', type: 'new' },
-    { role: '総務会長', name: '小笠原 慶太', type: 'move' },
-    { role: '選挙対策委員長', name: '由井 泰馳', type: 'new' },
+    { role: '幹事長', name: 'O.R', type: 'new' },
+    { role: '幹事長代行', name: 'M.Y', type: 'new' },
+    { role: '政調会長', name: 'T.K', type: 'new' },
+    { role: '総務会長', name: 'O.K', type: 'move' },
+    { role: '選挙対策委員長', name: 'Y.T', type: 'new' },
   ];
 
   const resignations = [
-    { role: '幹事長', name: '南百瀬 泊' },
-    { role: '選挙対策委員長', name: '小笠原 慶太' },
+    { role: '幹事長', name: 'N.T' },
+    { role: '選挙対策委員長', name: 'O.K' },
   ];
 
   return (
@@ -118,7 +118,7 @@ const PersonnelChangeNews: React.FC<PersonnelChangeNewsProps> = ({ onBack }) => 
                 </div>
              </div>
              <p className="text-xs text-stone-400 mt-3 pl-2">
-                ※小笠原慶太は選挙対策委員長を退任し、総務会長へ就任します。
+                ※O.Kは選挙対策委員長を退任し、総務会長へ就任します。
              </p>
           </section>
 

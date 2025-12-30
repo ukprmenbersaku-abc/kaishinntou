@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Clock, Sparkles, Calendar, Zap } from 'lucide-react';
+import { ArrowLeft, Clock, Sparkles, Calendar, Zap, MessageCircle, ExternalLink } from 'lucide-react';
 
 interface CountdownNoticeProps {
   onBack: () => void;
@@ -61,20 +61,44 @@ const CountdownNotice: React.FC<CountdownNoticeProps> = ({ onBack }) => {
                 </p>
                 <div className="space-y-4">
                     <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-stone-200">
-                        <div className="bg-brand-50 text-brand-600 p-3 rounded-full"><Calendar size={20} /></div>
+                        <div className="bg-brand-50 text-brand-600 p-3 rounded-full flex-shrink-0"><Calendar size={20} /></div>
                         <div>
                             <h3 className="font-bold text-stone-900">開催日時</h3>
                             <p className="text-stone-600">2025年12月31日 23:59:00頃 〜 2026年1月1日 00:00:30頃</p>
                         </div>
                     </div>
                     <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-stone-200">
-                        <div className="bg-yellow-50 text-yellow-600 p-3 rounded-full"><Zap size={20} /></div>
+                        <div className="bg-yellow-50 text-yellow-600 p-3 rounded-full flex-shrink-0"><Zap size={20} /></div>
                         <div>
                             <h3 className="font-bold text-stone-900">参加方法</h3>
                             <p className="text-stone-600">
                                 時間になりましたら、このサイトのトップページを開いてお待ちください。<br/>
                                 <span className="text-xs text-stone-400">※自動的にカウントダウンモードに切り替わります</span>
                             </p>
+                        </div>
+                    </div>
+                    
+                    {/* Google Chat Section */}
+                    <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-stone-200 shadow-sm ring-1 ring-emerald-100">
+                        <div className="bg-emerald-50 text-emerald-600 p-3 rounded-full flex-shrink-0"><MessageCircle size={20} /></div>
+                        <div>
+                            <h3 className="font-bold text-stone-900 flex items-center gap-2">
+                              Google Chat 特設スペース
+                              <span className="bg-emerald-100 text-emerald-700 text-[10px] px-2 py-0.5 rounded-full">連携企画</span>
+                            </h3>
+                            <p className="text-stone-600 mb-3 text-sm leading-relaxed mt-1">
+                                カウントダウンの1時間前（23:00頃）から、Google Chatにて特設スペースを開放します。<br/>
+                                リアルタイムでチャットしながら賑やかに新年を迎えたい方は、以下のフォームから事前申請をお願いします。
+                            </p>
+                            <a 
+                              href="https://forms.gle/6mL8gd2BMEvtvZxD8"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-5 py-2.5 rounded-lg transition-colors shadow-sm"
+                            >
+                              チャット参加申請フォーム
+                              <ExternalLink size={14} />
+                            </a>
                         </div>
                     </div>
                 </div>

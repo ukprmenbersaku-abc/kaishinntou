@@ -65,9 +65,15 @@ const Members: React.FC = () => {
                   onClick={() => handleMemberClick(support.id)}
                   className="group flex items-center gap-4 bg-white px-6 py-4 rounded-2xl shadow-sm border border-stone-200 hover:border-stone-400 hover:shadow-md transition-all duration-300 cursor-pointer text-left"
                 >
-                  <div className={`p-3 rounded-full transition-colors ${support.id === 'userkunn' ? 'bg-stone-100 text-stone-500 group-hover:bg-brand-100 group-hover:text-brand-600' : 'bg-blue-50 text-blue-500 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
-                    {support.id === 'userkunn' ? <Code2 size={24} /> : <Laptop size={24} />}
-                  </div>
+                  {support.image ? (
+                    <div className="w-12 h-12 rounded-full overflow-hidden border border-stone-100 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-stone-50">
+                      <img src={support.image} alt={support.name} className="w-full h-full object-cover" />
+                    </div>
+                  ) : (
+                    <div className={`p-3 rounded-full transition-colors ${support.id === 'userkunn' ? 'bg-stone-100 text-stone-500 group-hover:bg-brand-100 group-hover:text-brand-600' : 'bg-blue-50 text-blue-500 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
+                      {support.id === 'userkunn' ? <Code2 size={24} /> : <Laptop size={24} />}
+                    </div>
+                  )}
                   <div className="flex-grow">
                     <p className="text-xs text-stone-400 font-bold mb-0.5">
                       {support.id === 'userkunn' ? 'System / Design' : 'Infrastructure / Logic'}

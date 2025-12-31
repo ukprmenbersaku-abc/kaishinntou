@@ -31,22 +31,30 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ member, onBack }) => {
            {/* Decorative background circle */}
            <div className={`absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 transform translate-x-1/3 -translate-y-1/3 ${member.color.replace('text-', 'bg-')}`}></div>
 
-          <div className="relative z-10">
-            <div className={`inline-block px-4 py-1.5 rounded-full font-bold text-sm md:text-base border border-stone-200 mb-6 ${member.color}`}>
-              {member.role}
-            </div>
+          <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-center">
+            {member.image && (
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-lg overflow-hidden flex-shrink-0 bg-white">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                </div>
+            )}
             
-            <h1 className="text-4xl md:text-6xl font-bold text-stone-900 mb-6 tracking-tight">
-              {member.name}
-            </h1>
+            <div className="flex-grow">
+                <div className={`inline-block px-4 py-1.5 rounded-full font-bold text-sm md:text-base border border-stone-200 mb-6 ${member.color}`}>
+                  {member.role}
+                </div>
+                
+                <h1 className="text-4xl md:text-6xl font-bold text-stone-900 mb-6 tracking-tight">
+                  {member.name}
+                </h1>
 
-            <div className="flex flex-wrap gap-3">
-              {member.tags.map((tag, index) => (
-                <span key={index} className="inline-flex items-center text-sm font-medium text-stone-500 bg-white px-3 py-1 rounded-full border border-stone-200">
-                  <Hash size={14} className="mr-1" />
-                  {tag.replace('#', '')}
-                </span>
-              ))}
+                <div className="flex flex-wrap gap-3">
+                  {member.tags.map((tag, index) => (
+                    <span key={index} className="inline-flex items-center text-sm font-medium text-stone-500 bg-white px-3 py-1 rounded-full border border-stone-200">
+                      <Hash size={14} className="mr-1" />
+                      {tag.replace('#', '')}
+                    </span>
+                  ))}
+                </div>
             </div>
           </div>
         </div>

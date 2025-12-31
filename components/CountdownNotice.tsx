@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Clock, Sparkles, Calendar, Zap, MessageCircle, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Clock, Sparkles, Calendar, Zap, MessageCircle } from 'lucide-react';
 
 interface CountdownNoticeProps {
   onBack: () => void;
@@ -79,26 +79,25 @@ const CountdownNotice: React.FC<CountdownNoticeProps> = ({ onBack }) => {
                     </div>
                     
                     {/* Google Chat Section */}
-                    <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-stone-200 shadow-sm ring-1 ring-emerald-100">
-                        <div className="bg-emerald-50 text-emerald-600 p-3 rounded-full flex-shrink-0"><MessageCircle size={20} /></div>
+                    <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-stone-200 shadow-sm ring-1 ring-stone-200">
+                        <div className="bg-stone-100 text-stone-500 p-3 rounded-full flex-shrink-0"><MessageCircle size={20} /></div>
                         <div>
                             <h3 className="font-bold text-stone-900 flex items-center gap-2">
                               Google Chat 特設スペース
-                              <span className="bg-emerald-100 text-emerald-700 text-[10px] px-2 py-0.5 rounded-full">連携企画</span>
+                              <span className="bg-stone-200 text-stone-600 text-[10px] px-2 py-0.5 rounded-full">受付終了</span>
                             </h3>
                             <p className="text-stone-600 mb-3 text-sm leading-relaxed mt-1">
                                 カウントダウンの1時間前（23:00頃）から、Google Chatにて特設スペースを開放します。<br/>
-                                リアルタイムでチャットしながら賑やかに新年を迎えたい方は、以下のフォームから事前申請をお願いします。
+                                <span className="opacity-60 line-through decoration-stone-400">リアルタイムでチャットしながら賑やかに新年を迎えたい方は、以下のフォームから事前申請をお願いします。</span>
                             </p>
-                            <a 
-                              href="https://forms.gle/6mL8gd2BMEvtvZxD8"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-5 py-2.5 rounded-lg transition-colors shadow-sm"
+                            <div 
+                              className="inline-flex items-center gap-2 text-sm font-bold text-white bg-stone-400 px-5 py-2.5 rounded-lg cursor-not-allowed"
                             >
-                              チャット参加申請フォーム
-                              <ExternalLink size={14} />
-                            </a>
+                              受付は終了しました
+                            </div>
+                            <p className="text-xs text-red-500 font-bold mt-2">
+                                ※定刻（12/31 15:00）を過ぎたため、応募受付は終了しました。たくさんのご応募ありがとうございました。
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -111,8 +110,6 @@ const CountdownNotice: React.FC<CountdownNoticeProps> = ({ onBack }) => {
             </h2>
             <ul className="list-disc list-inside space-y-2 text-stone-600 bg-stone-50 p-6 rounded-2xl">
                 <li>カウントダウンはお使いの端末の時計に合わせて表示されます。正確な時間を知りたい場合は、端末の時刻設定をご確認ください。</li>
-                <li>新年を迎えた瞬間、ささやかながらお祝いの演出をご用意しています。</li>
-                <li>演出終了後、新年のご挨拶ページへのリンクが表示されます。</li>
             </ul>
           </section>
 

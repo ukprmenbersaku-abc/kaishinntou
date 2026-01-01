@@ -17,16 +17,31 @@ import SecretArchive from './components/SecretArchive';
 import SecretMeeting from './components/SecretMeeting';
 import SummaryDetail from './components/SummaryDetail';
 import PersonnelChangeNews from './components/PersonnelChangeNews';
-import CountdownNotice from './components/CountdownNotice';
-import CountdownOverlay from './components/CountdownOverlay'; 
 import NewYearGreeting from './components/NewYearGreeting';
+import CountdownNotice from './components/CountdownNotice';
+import CookieConsent from './components/CookieConsent';
+import NewYearCelebration from './components/NewYearCelebration';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
 import { Loader2, LockKeyhole, ArrowRight } from 'lucide-react';
 
+// Cookie Utility
+const setCookie = (name: string, value: string, days: number) => {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+};
+
+const getCookie = (name: string) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift();
+  return null;
+};
+
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'news-countdown' | 'new-year-greeting'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -34,8 +49,47 @@ function App() {
   const [user, setUser] = useState<any>(null);
   const [authInitialized, setAuthInitialized] = useState(false);
 
-  // New Year State (テスト用/本番用共通: カウントダウン完了通知)
-  const [isNewYear, setIsNewYear] = useState(false);
+  // New Year & Cookie State
+  const [cookieConsent, setCookieConsent] = useState<string | null>(null);
+  const [showCelebration, setShowCelebration] = useState(false);
+
+  useEffect(() => {
+    // Check local storage for consent on mount
+    const savedConsent = localStorage.getItem('cookie_consent');
+    setCookieConsent(savedConsent);
+
+    // If already accepted, check if we need to show celebration
+    if (savedConsent === 'accepted') {
+      checkCelebrationCookie();
+    }
+  }, []);
+
+  const checkCelebrationCookie = () => {
+    // 2026年のお祝いを見たかどうかチェック
+    const hasSeen = getCookie('has_seen_new_year_2026');
+    if (!hasSeen) {
+      setShowCelebration(true);
+    }
+  };
+
+  const handleAcceptCookies = () => {
+    localStorage.setItem('cookie_consent', 'accepted');
+    setCookieConsent('accepted');
+    // すぐに祝いのチェックを行う
+    checkCelebrationCookie();
+  };
+
+  const handleRejectCookies = () => {
+    localStorage.setItem('cookie_consent', 'rejected');
+    setCookieConsent('rejected');
+    // 拒否された場合は演出を表示しない（クッキーを使えないため履歴管理もできない）
+  };
+
+  const handleCelebrationClose = () => {
+    // クッキーに「見た」情報を保存 (365日)
+    setCookie('has_seen_new_year_2026', 'true', 365);
+    setShowCelebration(false);
+  };
 
   useEffect(() => {
     // Firebase Auth Listener
@@ -89,15 +143,15 @@ function App() {
         return;
       }
 
-      // Check for Countdown Notice Route
-      if (hash === '#/news/countdown') {
-        setCurrentView('news-countdown');
-        return;
-      }
-
       // Check for New Year Greeting Route
       if (hash === '#/news/new-year') {
         setCurrentView('new-year-greeting');
+        return;
+      }
+
+      // Check for Countdown Notice Route
+      if (hash === '#/news/countdown') {
+        setCurrentView('countdown-notice');
         return;
       }
 
@@ -220,8 +274,16 @@ function App() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-brand-200 selection:text-brand-900">
-      {/* カウントダウンオーバーレイ: 条件を満たした時のみ表示されます */}
-      <CountdownOverlay onNewYear={() => setIsNewYear(true)} />
+      
+      {/* Cookie Consent Banner */}
+      {!cookieConsent && (
+        <CookieConsent onAccept={handleAcceptCookies} onReject={handleRejectCookies} />
+      )}
+
+      {/* New Year Celebration Overlay (Only shown if consented and first time) */}
+      {showCelebration && (
+        <NewYearCelebration onClose={handleCelebrationClose} />
+      )}
       
       <Navbar user={user} />
       
@@ -236,7 +298,7 @@ function App() {
       {currentView === 'main' ? (
         <main>
           <Hero />
-          <News isNewYear={isNewYear} />
+          <News />
           <Manifesto />
           <Members />
           <Schedule />
@@ -321,15 +383,15 @@ function App() {
             onBack={() => window.location.hash = '#home'}
           />
         </main>
-      ) : currentView === 'news-countdown' ? (
-        <main>
-          <CountdownNotice
-            onBack={() => window.location.hash = '#home'}
-          />
-        </main>
       ) : currentView === 'new-year-greeting' ? (
         <main>
           <NewYearGreeting 
+             onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'countdown-notice' ? (
+        <main>
+          <CountdownNotice 
              onBack={() => window.location.hash = '#home'}
           />
         </main>

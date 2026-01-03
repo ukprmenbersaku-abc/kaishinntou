@@ -20,6 +20,14 @@ export const newsData: NewsItem[] = [
     icon: Sun
   },
   {
+    id: 'n_countdown',
+    date: '2025.12.28',
+    category: 'イベント',
+    title: '【予告】年越しカウントダウンイベントの実施について',
+    link: '#/news/countdown',
+    icon: Sparkles
+  },
+  {
     id: 'n_personnel_20251222',
     date: '2025.12.22',
     category: 'お知らせ',
@@ -42,14 +50,6 @@ export const newsData: NewsItem[] = [
     title: '生徒総会が開催されます（場所：体育館）',
     link: '#schedule-detail',
     icon: CalendarClock
-  },
-  {
-    id: 'n_countdown',
-    date: '2025.12.15',
-    category: 'イベント',
-    title: '【予告】年越しカウントダウンイベントの実施について',
-    link: '#/news/countdown',
-    icon: Sparkles
   },
   {
     id: 'n2',

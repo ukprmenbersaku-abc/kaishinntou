@@ -41,7 +41,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onReject }) => 
           </button>
           <button 
             onClick={onAccept}
-            className="px-6 py-2.5 rounded-full bg-brand-600 text-white text-sm font-bold hover:bg-brand-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            className="px-6 py-2.5 rounded-full bg-brand-600 text-white text-sm font-bold hover:bg-brand-700 transition-colors"
           >
             すべて受け入れる
           </button>

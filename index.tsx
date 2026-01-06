@@ -1,4 +1,4 @@
-import React, { ReactNode, ErrorInfo, StrictMode } from 'react';
+import React, { Component, ReactNode, ErrorInfo, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -34,7 +34,7 @@ interface ErrorBoundaryState {
 }
 
 // Componentを直接継承し、TypeScriptがthis.propsやthis.stateを正しく解決できるように修正
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   
   public state: ErrorBoundaryState = {
     hasError: false,

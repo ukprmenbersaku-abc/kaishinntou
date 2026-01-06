@@ -350,7 +350,7 @@ function App() {
       ) : currentView === 'news-archive' ? (
         <main>
           <NewsArchive 
-            onBack={() => window.location.hash = '#home'}
+            onBack={() => window.location.hash = '#news'}
           />
         </main>
       ) : currentView === 'schedule' ? (
@@ -362,37 +362,37 @@ function App() {
       ) : currentView === 'secret-archive' ? (
         <main>
           <SecretArchive 
-            onBack={() => window.location.hash = '#home'}
+            onBack={() => window.location.hash = '#dashboard'}
           />
         </main>
       ) : currentView === 'secret-meeting' ? (
         <main>
           <SecretMeeting
-            onBack={() => window.location.hash = '#home'}
+            onBack={() => window.location.hash = '#dashboard'}
           />
         </main>
       ) : currentView === 'summary' ? (
         <main>
           <SummaryDetail 
-            onBack={() => window.location.hash = '#home'}
+            onBack={() => window.location.hash = '#news'}
           />
         </main>
       ) : currentView === 'news-personnel-change' ? (
         <main>
           <PersonnelChangeNews
-            onBack={() => window.location.hash = '#home'}
+            onBack={() => window.location.hash = '#news'}
           />
         </main>
       ) : currentView === 'new-year-greeting' ? (
         <main>
           <NewYearGreeting 
-             onBack={() => window.location.hash = '#home'}
+             onBack={() => window.location.hash = '#news'}
           />
         </main>
       ) : currentView === 'countdown-notice' ? (
         <main>
           <CountdownNotice 
-             onBack={() => window.location.hash = '#home'}
+             onBack={() => window.location.hash = '#news'}
           />
         </main>
       ) : (

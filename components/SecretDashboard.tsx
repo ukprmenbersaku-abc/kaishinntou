@@ -104,7 +104,7 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
 
   return (
     // Navbarの高さ分+余白を確保するために pt-28 を設定
-    <section className="bg-white border-b border-stone-200 shadow-sm relative overflow-hidden pt-28 pb-12">
+    <section id="dashboard" className="bg-white border-b border-stone-200 shadow-sm relative overflow-hidden pt-28 pb-12">
       {/* Background Pattern - Light Mode */}
       <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none text-brand-900">
         <Lock size={200} />

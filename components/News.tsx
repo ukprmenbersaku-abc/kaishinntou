@@ -9,7 +9,7 @@ const News: React.FC<NewsProps> = () => {
   const recentNews = newsData.slice(0, 4);
 
   return (
-    <section className="py-12 bg-white border-b border-stone-100">
+    <section id="news" className="py-12 bg-white border-b border-stone-100">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6">
           

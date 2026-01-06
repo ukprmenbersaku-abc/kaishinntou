@@ -42,7 +42,7 @@ const NewYearGreeting: React.FC<NewYearGreetingProps> = ({ onBack }) => {
         <div className="py-4 md:py-8">
             
             {/* Main Nengajo Card */}
-            <div className="bg-[#fffbf0] p-8 md:p-12 rounded-[20px] shadow-xl relative overflow-hidden max-w-2xl mx-auto border-8 border-double border-red-800">
+            <div className="bg-[#fffbf0] p-8 md:p-16 rounded-[20px] shadow-xl relative overflow-hidden max-w-3xl mx-auto border-8 border-double border-red-800">
                 
                 {/* Corner Decorations */}
                 <div className="absolute top-4 left-4 text-4xl opacity-20 transform -rotate-12">🌸</div>
@@ -51,31 +51,23 @@ const NewYearGreeting: React.FC<NewYearGreetingProps> = ({ onBack }) => {
 
                 <div className="relative z-10 flex flex-col items-center text-center">
                     
-                    {/* Vertical Text for Traditional Feel (PC only) */}
-                    <div className="hidden md:flex flex-row-reverse gap-8 justify-center h-64 mb-10 font-serif text-stone-800">
-                        <div className="writing-vertical-rl text-6xl font-bold tracking-widest text-stone-900 leading-none">
+                    {/* Title Section (Horizontal) */}
+                    <div className="mb-10 text-stone-900">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-6 font-serif tracking-widest leading-tight">
                             謹賀新年
-                        </div>
-                        <div className="writing-vertical-rl text-2xl tracking-widest pt-4">
-                            旧年中は多大なるご支援を賜り<br/>厚く御礼申し上げます
-                        </div>
-                    </div>
-
-                    {/* Horizontal Text for Mobile */}
-                    <div className="md:hidden mb-8">
-                        <h1 className="text-5xl font-bold text-stone-900 mb-4 font-serif">謹賀新年</h1>
-                        <p className="text-sm text-stone-600 font-medium">
+                        </h1>
+                        <p className="text-base md:text-xl text-stone-600 font-medium font-serif tracking-widest leading-relaxed">
                             旧年中は多大なるご支援を賜り<br/>厚く御礼申し上げます
                         </p>
                     </div>
 
                     {/* Year */}
-                    <div className="text-red-600 font-bold text-lg tracking-[0.3em] mb-8 border-t border-b border-red-200 py-2 w-full max-w-xs">
+                    <div className="text-red-600 font-bold text-lg tracking-[0.3em] mb-10 border-t border-b border-red-200 py-2 w-full max-w-xs">
                         2026 元旦
                     </div>
 
                     {/* Main Message */}
-                    <div className="text-left md:text-center space-y-6 font-medium text-stone-700 leading-loose text-sm md:text-base bg-white/50 p-6 rounded-xl backdrop-blur-sm w-full">
+                    <div className="text-center space-y-6 font-medium text-stone-700 leading-loose text-base md:text-lg bg-white/60 p-8 rounded-xl backdrop-blur-sm w-full border border-stone-100/50 shadow-sm">
                         <p>
                             筑摩野改新党は、「聴く学校」から「動く学校」へ。<br/>
                             2026年は、公約実現に向けた勝負の年となります。
@@ -91,23 +83,25 @@ const NewYearGreeting: React.FC<NewYearGreetingProps> = ({ onBack }) => {
                     </div>
 
                     {/* Signature */}
-                    <div className="mt-10 flex flex-col items-center md:items-end w-full">
-                        <div className="text-right">
-                            <p className="text-xs text-stone-500 mb-1">筑摩野中学校 生徒会立候補者団体</p>
-                            <p className="text-lg font-bold text-stone-900">筑摩野改新党</p>
-                            <div className="mt-2 flex items-end justify-end gap-4">
-                                <div className="text-right">
-                                    <span className="text-xs text-stone-400 block">代表</span>
-                                    <span className="font-serif font-bold text-xl">岩本 宗祐</span>
+                    <div className="mt-12 flex flex-col items-center w-full">
+                        <div className="text-center">
+                            <p className="text-sm text-stone-500 mb-2 font-medium tracking-wide">筑摩野中学校 生徒会立候補者団体</p>
+                            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-6 font-serif">筑摩野改新党</h2>
+                            
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
+                                <div className="text-center">
+                                    <span className="text-xs text-stone-400 block mb-1">代表</span>
+                                    <span className="font-serif font-bold text-xl border-b border-stone-300 pb-1 px-2">岩本 宗祐</span>
                                 </div>
-                                <div className="text-right">
-                                    <span className="text-xs text-stone-400 block">共同代表</span>
-                                    <span className="font-serif font-bold text-xl">S</span>
+                                <div className="text-center">
+                                    <span className="text-xs text-stone-400 block mb-1">共同代表</span>
+                                    <span className="font-serif font-bold text-xl border-b border-stone-300 pb-1 px-2">S</span>
                                 </div>
                             </div>
                         </div>
+                        
                         {/* Hanko (Stamp) effect */}
-                        <div className="mt-4 md:-mt-8 md:mr-32 w-12 h-12 border-2 border-red-600 rounded-full flex items-center justify-center text-red-600 font-serif font-bold text-xs transform rotate-12 opacity-80 bg-white/50">
+                        <div className="mt-8 w-16 h-16 border-4 border-red-600 rounded-full flex items-center justify-center text-red-600 font-serif font-bold text-lg transform rotate-12 opacity-80 bg-white/50 shadow-sm">
                             改新
                         </div>
                     </div>
@@ -130,12 +124,6 @@ const NewYearGreeting: React.FC<NewYearGreetingProps> = ({ onBack }) => {
              </div>
         </div>
       </div>
-      <style>{`
-        .writing-vertical-rl {
-          writing-mode: vertical-rl;
-          text-orientation: upright;
-        }
-      `}</style>
     </div>
   );
 };

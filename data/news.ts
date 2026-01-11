@@ -1,4 +1,4 @@
-import { CalendarClock, Mic, Bell, Info, UserCog, Clock, Sparkles, Sun } from 'lucide-react';
+import { CalendarClock, Mic, Bell, Info, UserCog, Clock, Sparkles, Sun, MessageSquare, Video } from 'lucide-react';
 import React from 'react';
 
 export interface NewsItem {
@@ -11,6 +11,22 @@ export interface NewsItem {
 }
 
 export const newsData: NewsItem[] = [
+  {
+    id: 'n_online_meeting',
+    date: '2026.01.10',
+    category: 'お知らせ',
+    title: '【重要】1/14(水) オンライン会議の開催について',
+    link: '#/news/online-meeting',
+    icon: Video
+  },
+  {
+    id: 'n_chat_release',
+    date: '2026.01.08',
+    category: 'お知らせ',
+    title: '【予告】党員用ウェブチャット（ベータ版）を1/13にリリースします',
+    link: '#/news/chat-release',
+    icon: MessageSquare
+  },
   {
     id: 'n_newyear_2026',
     date: '2026.01.01',

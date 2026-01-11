@@ -27,8 +27,12 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onReject }) => 
         <div className="flex-grow">
           <h3 className="font-bold text-stone-900 mb-2">クッキー（Cookie）の使用について</h3>
           <p className="text-sm text-stone-600 leading-relaxed">
-            当サイトでは、新年のお祝い演出を一度だけ表示するなど、ユーザー体験を向上させるためにクッキーを使用します。<br className="hidden sm:block"/>
-            「すべて受け入れる」を選択すると、演出機能が有効になります。「拒否する」を選択した場合、クッキーは使用されません。
+            当サイトでは、新年のお祝い演出を一度だけ表示するなど、ユーザー体験を向上させるためにCookieを使用します。<br className="hidden sm:block"/>
+            詳しくは
+            <a href="#privacy-policy" className="text-brand-600 underline hover:text-brand-800 font-bold mx-1">
+              プライバシーポリシー
+            </a>
+            をご確認ください。
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, ErrorInfo, StrictMode } from 'react';
+import React, { ReactNode, ErrorInfo, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -33,24 +33,26 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
-// Componentを直接継承し、TypeScriptがthis.propsやthis.stateを正しく解決できるように修正
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+// Using React.Component explicitly and adding constructor to ensure types are resolved correctly
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   
-  public state: ErrorBoundaryState = {
-    hasError: false,
-    error: null
-  };
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null
+    };
+  }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  public static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("Uncaught error:", error, errorInfo);
   }
 
-  render() {
-    // 修正: this.state.hasError を参照してエラー時のUIを表示
+  public render() {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-stone-50 p-4">
@@ -76,8 +78,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       );
     }
 
-    // 修正: this.props.children を安全に返却。
-    // Componentを継承しているため、this.propsが型安全に参照可能になります。
     return this.props.children;
   }
 }

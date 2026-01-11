@@ -21,6 +21,9 @@ import NewYearGreeting from './components/NewYearGreeting';
 import CountdownNotice from './components/CountdownNotice';
 import CookieConsent from './components/CookieConsent';
 import NewYearCelebration from './components/NewYearCelebration';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import ChatReleaseNews from './components/ChatReleaseNews';
+import OnlineMeetingNews from './components/OnlineMeetingNews';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
@@ -41,7 +44,7 @@ const getCookie = (name: string) => {
 };
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -158,6 +161,24 @@ function App() {
       // Check for Personnel Change News Route
       if (hash === '#news/personnel-change') {
         setCurrentView('news-personnel-change');
+        return;
+      }
+
+      // Check for Chat Release News Route
+      if (hash === '#/news/chat-release') {
+        setCurrentView('chat-release');
+        return;
+      }
+
+      // Check for Online Meeting News Route
+      if (hash === '#/news/online-meeting') {
+        setCurrentView('online-meeting');
+        return;
+      }
+
+      // Check for Privacy Policy Route
+      if (hash === '#privacy-policy') {
+        setCurrentView('privacy-policy');
         return;
       }
 
@@ -392,6 +413,24 @@ function App() {
       ) : currentView === 'countdown-notice' ? (
         <main>
           <CountdownNotice 
+             onBack={() => window.location.hash = '#news'}
+          />
+        </main>
+      ) : currentView === 'privacy-policy' ? (
+        <main>
+          <PrivacyPolicy 
+             onBack={() => window.location.hash = '#home'}
+          />
+        </main>
+      ) : currentView === 'chat-release' ? (
+        <main>
+          <ChatReleaseNews 
+             onBack={() => window.location.hash = '#news'}
+          />
+        </main>
+      ) : currentView === 'online-meeting' ? (
+        <main>
+          <OnlineMeetingNews 
              onBack={() => window.location.hash = '#news'}
           />
         </main>

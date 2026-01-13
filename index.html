@@ -58,7 +58,7 @@
       // 1. 必要なSDKのインポート (Auth と Firestore と Realtime DB)
       // --------------------------------------------------------------------------
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+      // import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js"; // Google AnalyticsRemoved
       import { 
         getAuth, 
         onAuthStateChanged, 
@@ -85,7 +85,7 @@
       // 3. Firebase アプリと各サービスの初期化 (変数に格納)
       // --------------------------------------------------------------------------
       const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app); 
+      // const analytics = getAnalytics(app); // Google Analytics Removed
       
       const auth = getAuth(app);         
       const db = getFirestore(app);      

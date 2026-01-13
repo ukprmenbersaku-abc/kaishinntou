@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Shield, Cookie, Info, BarChart3 } from 'lucide-react';
+import { ArrowLeft, Shield, Cookie, Info } from 'lucide-react';
 
 interface PrivacyPolicyProps {
   onBack: () => void;
@@ -66,43 +66,12 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
             </h2>
             <div className="bg-stone-50 rounded-2xl p-6 md:p-8 space-y-6">
               <div>
-                <h3 className="font-bold text-lg text-stone-900 mb-2">1. 演出の制御（機能性Cookie）</h3>
+                <h3 className="font-bold text-lg text-stone-900 mb-2">演出の制御（機能性Cookie）</h3>
                 <p className="text-stone-600">
-                  新年のお祝い演出や、ポップアップ通知などを「一度だけ表示する」ために使用します。
+                  ポップアップ通知などを「一度だけ表示する」ために使用します。
                   これにより、ページを開くたびに同じ演出が表示されるのを防ぎ、快適にサイトをご利用いただけます。
                 </p>
               </div>
-              <div>
-                <h3 className="font-bold text-lg text-stone-900 mb-2">2. アクセス解析（分析用Cookie）</h3>
-                <p className="text-stone-600">
-                  サイトの利用状況（アクセス数や閲覧ページなど）を把握し、サイトの改善に役立てるために使用します。
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="flex items-center gap-3 text-2xl font-bold text-stone-900 mb-6 border-b border-stone-100 pb-2">
-              <BarChart3 className="text-orange-500" />
-              Google Analyticsの使用について
-            </h2>
-            <div className="prose prose-stone max-w-none text-stone-700 leading-loose">
-              <p>
-                当サイトでは、Googleによるアクセス解析ツール「Google Analytics」を使用しています。
-                このGoogle Analyticsはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
-              </p>
-              <p>
-                この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。<br/>
-                Google Analyticsの規約に関しての詳細は
-                <a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline hover:text-brand-800">
-                  Google Analyticsサービス利用規約
-                </a>
-                のページや
-                <a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline hover:text-brand-800">
-                  Googleポリシーと規約
-                </a>
-                ページをご覧ください。
-              </p>
             </div>
           </section>
 
@@ -119,6 +88,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
 
           <div className="pt-8 border-t border-stone-100 text-center">
              <p className="text-stone-500 text-sm">制定日: 2025年12月23日</p>
+             <p className="text-stone-500 text-sm">改定日: 2026年01月13日</p>
              <p className="font-bold text-stone-900 mt-2">筑摩野改新党</p>
           </div>
 

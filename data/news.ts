@@ -12,20 +12,20 @@ export interface NewsItem {
 
 export const newsData: NewsItem[] = [
   {
-    id: 'n_online_meeting',
-    date: '2026.01.10',
-    category: 'お知らせ',
-    title: '【重要】1/14(水) オンライン会議の開催について',
-    link: '#/news/online-meeting',
-    icon: Video
-  },
-  {
     id: 'n_chat_release',
-    date: '2026.01.08',
+    date: '2026.01.13',
     category: 'お知らせ',
-    title: '【予告】党員用ウェブチャット（ベータ版）を1/13にリリースします',
+    title: '【公開】新チャットアプリ「SnapNode」（ベータ版）をリリースしました',
     link: '#/news/chat-release',
     icon: MessageSquare
+  },
+  {
+    id: 'n_online_meeting',
+    date: '2026.01.12',
+    category: 'お知らせ',
+    title: '【延期】1/14(水) オンライン会議の延期について',
+    link: '#/news/online-meeting',
+    icon: Video
   },
   {
     id: 'n_newyear_2026',

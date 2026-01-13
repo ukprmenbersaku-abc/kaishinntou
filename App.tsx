@@ -20,7 +20,6 @@ import PersonnelChangeNews from './components/PersonnelChangeNews';
 import NewYearGreeting from './components/NewYearGreeting';
 import CountdownNotice from './components/CountdownNotice';
 import CookieConsent from './components/CookieConsent';
-import NewYearCelebration from './components/NewYearCelebration';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ChatReleaseNews from './components/ChatReleaseNews';
 import OnlineMeetingNews from './components/OnlineMeetingNews';
@@ -52,46 +51,23 @@ function App() {
   const [user, setUser] = useState<any>(null);
   const [authInitialized, setAuthInitialized] = useState(false);
 
-  // New Year & Cookie State
+  // Cookie State
   const [cookieConsent, setCookieConsent] = useState<string | null>(null);
-  const [showCelebration, setShowCelebration] = useState(false);
 
   useEffect(() => {
     // Check local storage for consent on mount
     const savedConsent = localStorage.getItem('cookie_consent');
     setCookieConsent(savedConsent);
-
-    // If already accepted, check if we need to show celebration
-    if (savedConsent === 'accepted') {
-      checkCelebrationCookie();
-    }
   }, []);
-
-  const checkCelebrationCookie = () => {
-    // 2026年のお祝いを見たかどうかチェック
-    const hasSeen = getCookie('has_seen_new_year_2026');
-    if (!hasSeen) {
-      setShowCelebration(true);
-    }
-  };
 
   const handleAcceptCookies = () => {
     localStorage.setItem('cookie_consent', 'accepted');
     setCookieConsent('accepted');
-    // すぐに祝いのチェックを行う
-    checkCelebrationCookie();
   };
 
   const handleRejectCookies = () => {
     localStorage.setItem('cookie_consent', 'rejected');
     setCookieConsent('rejected');
-    // 拒否された場合は演出を表示しない（クッキーを使えないため履歴管理もできない）
-  };
-
-  const handleCelebrationClose = () => {
-    // クッキーに「見た」情報を保存 (365日)
-    setCookie('has_seen_new_year_2026', 'true', 365);
-    setShowCelebration(false);
   };
 
   useEffect(() => {
@@ -299,11 +275,6 @@ function App() {
       {/* Cookie Consent Banner */}
       {!cookieConsent && (
         <CookieConsent onAccept={handleAcceptCookies} onReject={handleRejectCookies} />
-      )}
-
-      {/* New Year Celebration Overlay (Only shown if consented and first time) */}
-      {showCelebration && (
-        <NewYearCelebration onClose={handleCelebrationClose} />
       )}
       
       <Navbar user={user} />

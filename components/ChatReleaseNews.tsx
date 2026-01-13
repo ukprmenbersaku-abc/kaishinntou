@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, MessageSquare, AlertTriangle, Users } from 'lucide-react';
+import { ArrowLeft, MessageSquare, ExternalLink, Key, Mail, ShieldCheck } from 'lucide-react';
 
 interface ChatReleaseNewsProps {
   onBack: () => void;
@@ -24,23 +24,23 @@ const ChatReleaseNews: React.FC<ChatReleaseNewsProps> = ({ onBack }) => {
           <span className="font-bold">ホームに戻る</span>
         </button>
 
-        {/* Header */}
-        <div className="bg-brand-50 rounded-[2.5rem] p-8 md:p-12 mb-12 border border-brand-100 shadow-sm relative overflow-hidden">
-           <div className="absolute top-0 right-0 p-8 opacity-10 text-brand-900 pointer-events-none">
+        {/* Header - Changed from Emerald to Indigo for SnapNode theme */}
+        <div className="bg-indigo-50 rounded-[2.5rem] p-8 md:p-12 mb-12 border border-indigo-100 shadow-sm relative overflow-hidden">
+           <div className="absolute top-0 right-0 p-8 opacity-10 text-indigo-900 pointer-events-none">
             <MessageSquare size={150} />
           </div>
 
           <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4 text-brand-700">
-              <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-brand-100 shadow-sm text-brand-600">お知らせ</span>
-              <span className="text-sm font-medium">2026.01.08</span>
+            <div className="flex items-center gap-3 mb-4 text-indigo-700">
+              <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-indigo-100 shadow-sm text-indigo-600">お知らせ</span>
+              <span className="text-sm font-medium">2026.01.13</span>
             </div>
             
             <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4 tracking-tight leading-tight">
-              【予告】党員用ウェブチャット<br/>1/13(火) リリース決定
+              【公開】新チャットアプリ<br/>「SnapNode」(ベータ版)
             </h1>
             <p className="text-lg text-stone-600 font-medium">
-              より円滑なコミュニケーションを目指して。
+              お待たせしました。新しいコミュニケーションツールを公開します。
             </p>
           </div>
         </div>
@@ -50,45 +50,84 @@ const ChatReleaseNews: React.FC<ChatReleaseNewsProps> = ({ onBack }) => {
           
           <section>
              <h2 className="text-2xl font-bold text-stone-900 mb-6 flex items-center gap-2">
-                <Users className="text-brand-500" />
-                導入の目的
+                <ExternalLink className="text-brand-500" />
+                アクセス方法
              </h2>
-             <p className="text-lg text-stone-700 leading-loose mb-6">
-                これまでメールや口頭で行っていた党内の連絡を、専用のウェブチャットに移行します。<br/>
-                これにより、情報の見落としを防ぎ、よりスピーディーな意見交換が可能になります。<br/>
-                今後はこのチャットを通じて、活動スケジュールの調整や議案の相談を行っていく予定です。
-             </p>
-          </section>
-
-          <section>
-             <div className="bg-yellow-50 border border-yellow-200 rounded-3xl p-8">
-                <h3 className="text-xl font-bold text-yellow-800 mb-4 flex items-center gap-2">
-                    <AlertTriangle size={24} />
-                    ベータ版としての提供について
-                </h3>
-                <p className="text-stone-700 leading-relaxed mb-4">
-                    今回リリースするのは「ベータ版（試用版）」となります。<br/>
-                    開発途中の機能が含まれており、動作が不安定になる可能性があります。
+             <div className="bg-white border border-stone-200 rounded-3xl p-8 shadow-sm">
+                <p className="text-stone-700 leading-relaxed mb-6">
+                    以下のリンクからウェブチャット「SnapNode」にアクセスできます。<br/>
+                    ブックマーク、または党員ダッシュボードからのアクセスをお勧めします。
                 </p>
-                <ul className="list-disc list-inside space-y-2 text-stone-600 bg-white/60 p-4 rounded-xl border border-yellow-100">
-                    <li>メッセージの通知機能は現在開発中です。</li>
-                    <li>予期せぬエラーが発生した場合は、S（共同代表）までご報告ください。</li>
-                    <li>予告なくメンテナンスを行う場合があります。</li>
-                </ul>
+                <div className="text-center">
+                    <a 
+                        href="https://ukpr-s-chat.pages.dev" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-lg shadow-lg shadow-indigo-200 transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                        SnapNodeを開く
+                        <ExternalLink size={20} />
+                    </a>
+                    <p className="text-xs text-stone-400 mt-4 font-mono">
+                        https://ukpr-s-chat.pages.dev
+                    </p>
+                </div>
              </div>
           </section>
 
-          <section className="text-center pt-8 border-t border-stone-100">
-             <p className="font-bold text-stone-800 text-lg mb-2">
-                リリース予定日
-             </p>
-             <p className="text-4xl font-bold text-brand-600 mb-6 font-mono">
-                2026.01.13 <span className="text-lg text-stone-400 font-normal ml-2">(Tue)</span>
-             </p>
-             <p className="text-stone-500">
-                党員専用ダッシュボードからアクセス可能になる予定です。<br/>
-                楽しみにお待ちください。
-             </p>
+          <section>
+             <h2 className="text-2xl font-bold text-stone-900 mb-6 flex items-center gap-2">
+                <Key className="text-brand-500" />
+                アカウント登録ルール
+             </h2>
+             <div className="bg-stone-50 border border-stone-200 rounded-3xl p-8">
+                <p className="font-bold text-stone-800 mb-4">
+                    利用を開始するには、アカウント登録（サインアップ）が必要です。<br/>
+                    管理上の理由から、以下のルールに従って登録してください。
+                </p>
+
+                <div className="space-y-4">
+                    <div className="bg-white p-5 rounded-xl border border-stone-200 flex items-start gap-4">
+                        <div className="bg-blue-50 text-blue-600 p-2 rounded-lg flex-shrink-0">
+                            <Mail size={24} />
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-stone-800 mb-1">メールアドレス</h3>
+                            <p className="text-sm text-stone-600 mb-2">
+                                <strong>「自分の名前（苗字英語小文字）@chikushin.com」</strong> の形式にしてください。
+                            </p>
+                            <div className="bg-stone-100 p-3 rounded-lg text-sm font-mono text-stone-700">
+                                <span className="text-stone-400">例：岩本宗祐の場合</span><br/>
+                                <span className="font-bold text-blue-600">iwamoto@chikushin.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-5 rounded-xl border border-stone-200 flex items-start gap-4">
+                        <div className="bg-orange-50 text-orange-600 p-2 rounded-lg flex-shrink-0">
+                            <ShieldCheck size={24} />
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-stone-800 mb-1">パスワード</h3>
+                            <p className="text-sm text-stone-600">
+                                自由に設定してください。<br/>
+                                <span className="text-xs text-stone-400">※忘れないように管理をお願いします。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+          </section>
+
+          <section>
+             <h2 className="text-xl font-bold text-stone-900 mb-4 border-l-4 border-brand-500 pl-4">
+                注意事項（ベータ版）
+             </h2>
+             <ul className="list-disc list-inside space-y-2 text-stone-600 bg-white border border-stone-200 p-6 rounded-2xl">
+                 <li>本システムはベータ版です。動作が不安定な場合があります。</li>
+                 <li>チャットの内容は党員のみ閲覧可能ですが、機密情報の取り扱いには引き続きご注意ください。</li>
+                 <li>不具合を見つけた場合は、S（共同代表）までご連絡ください。</li>
+             </ul>
           </section>
 
         </div>

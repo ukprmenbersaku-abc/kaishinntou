@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Lock, FileText, Calendar, LogOut, ShieldCheck, ChevronRight, Palette, ExternalLink, Grid } from 'lucide-react';
+import { Lock, FileText, Calendar, LogOut, ShieldCheck, ChevronRight, Palette, ExternalLink, Grid, MessageCircle } from 'lucide-react';
 
 interface SecretDashboardProps {
   userEmail: string;
@@ -50,6 +50,18 @@ const SecretDashboard: React.FC<SecretDashboardProps> = ({ userEmail, userId, on
   };
 
   const apps = [
+    {
+      name: 'SnapNode',
+      url: 'https://ukpr-s-chat.pages.dev',
+      icon: (
+        <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center shadow-sm hover:scale-105 transition-transform duration-300 border border-indigo-100">
+           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+            <circle cx="12" cy="12" r="3" fill="#4F46E5" />
+          </svg>
+        </div>
+      )
+    },
     {
       name: 'SQLite Studio',
       url: 'https://ukpr-sqlite.pages.dev',

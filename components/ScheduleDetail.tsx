@@ -43,6 +43,83 @@ const rawScheduleData = [
     description: '現3年生役員から、新しく選出された2年生・1年生役員へのバトンタッチ。正式に新体制がスタートします。'
   },
   {
+    dateStr: '2026年1月1日(木)',
+    title: '元日',
+    time: '終日',
+    location: '-',
+    description: '国民の祝日。2026年の始まりです。'
+  },
+  {
+    dateStr: '2026年1月6日(火)',
+    title: '冬休み最終日',
+    time: '終日',
+    location: '-',
+    description: '冬休み最終日です。翌日からの3学期に向けて準備をしましょう。'
+  },
+  {
+    dateStr: '2026年1月7日(水)',
+    title: '3学期はじめの式',
+    time: '午前',
+    location: '体育館',
+    description: '3学期の始業式です。1年の締めくくりとなる学期のスタートです。'
+  },
+  {
+    dateStr: '2026年1月9日(金)',
+    title: '生徒会⑫',
+    time: '放課後',
+    location: '生徒会室',
+    description: '第12回生徒会委員会。新役員による初めての生徒会です。'
+  },
+  {
+    dateStr: '2026年1月12日(月)',
+    title: '成人の日',
+    time: '終日',
+    location: '-',
+    description: '国民の祝日。'
+  },
+  {
+    dateStr: '2026年1月13日(火)',
+    title: '総合テスト3年⑤',
+    time: '一日',
+    location: '各教室',
+    description: '3年生の第5回総合テストです。'
+  },
+  {
+    dateStr: '2026年1月19日(月)',
+    title: '教育相談①',
+    time: '放課後',
+    location: '各教室',
+    description: '担任の先生との教育相談期間が始まります。'
+  },
+  {
+    dateStr: '2026年1月22日(木)',
+    title: '生徒会⑬ / 教育相談②',
+    time: '放課後',
+    location: '生徒会室 / 各教室',
+    description: '第13回生徒会委員会。教育相談2日目。'
+  },
+  {
+    dateStr: '2026年1月23日(金)',
+    title: '漢字検定 / 教育相談③',
+    time: '放課後',
+    location: '指定教室',
+    description: '漢字検定実施日。教育相談3日目。'
+  },
+  {
+    dateStr: '2026年1月26日(月)',
+    title: '教育相談④',
+    time: '放課後',
+    location: '各教室',
+    description: '教育相談4日目。'
+  },
+  {
+    dateStr: '2026年1月27日(火)',
+    title: '教育相談⑤',
+    time: '放課後',
+    location: '各教室',
+    description: '教育相談5日目。'
+  },
+  {
     dateStr: '2026年4月(未定)',
     title: '二学年代議員会選抜',
     time: '未定',
@@ -101,8 +178,8 @@ interface ScheduleDetailProps {
 }
 
 const ScheduleDetail: React.FC<ScheduleDetailProps> = ({ onBack }) => {
-  // 初期表示を2025年12月に設定
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 11, 1));
+  // 初期表示を現在の日付に設定
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [now, setNow] = useState(new Date());
 

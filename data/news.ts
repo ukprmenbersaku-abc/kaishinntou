@@ -1,4 +1,4 @@
-import { CalendarClock, Mic, Bell, Info, UserCog, Clock, Sparkles, Sun, MessageSquare, Video } from 'lucide-react';
+import { CalendarClock, Mic, Bell, Info, UserCog, Clock, Sparkles, Sun, MessageSquare, Video, CloudSnow, Snowflake } from 'lucide-react';
 import React from 'react';
 
 export interface NewsItem {
@@ -11,6 +11,22 @@ export interface NewsItem {
 }
 
 export const newsData: NewsItem[] = [
+  {
+    id: 'n_snow_update',
+    date: '2026.01.22',
+    category: 'お知らせ',
+    title: '【13:20更新】大雪に関する追加情報（松本地域）',
+    link: '#/news/heavy-snow',
+    icon: CloudSnow
+  },
+  {
+    id: 'n_snow_warning',
+    date: '2026.01.22',
+    category: 'お知らせ',
+    title: '【注意】大雪による路面凍結・校内通行について',
+    link: '#/news/heavy-snow',
+    icon: Snowflake
+  },
   {
     id: 'n_chat_release',
     date: '2026.01.13',

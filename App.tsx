@@ -23,6 +23,7 @@ import CookieConsent from './components/CookieConsent';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ChatReleaseNews from './components/ChatReleaseNews';
 import OnlineMeetingNews from './components/OnlineMeetingNews';
+import HeavySnowNews from './components/HeavySnowNews';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
@@ -43,7 +44,7 @@ const getCookie = (name: string) => {
 };
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting' | 'heavy-snow'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -149,6 +150,12 @@ function App() {
       // Check for Online Meeting News Route
       if (hash === '#/news/online-meeting') {
         setCurrentView('online-meeting');
+        return;
+      }
+
+      // Check for Heavy Snow News Route
+      if (hash === '#/news/heavy-snow') {
+        setCurrentView('heavy-snow');
         return;
       }
 
@@ -402,6 +409,12 @@ function App() {
       ) : currentView === 'online-meeting' ? (
         <main>
           <OnlineMeetingNews 
+             onBack={() => window.location.hash = '#news'}
+          />
+        </main>
+      ) : currentView === 'heavy-snow' ? (
+        <main>
+          <HeavySnowNews 
              onBack={() => window.location.hash = '#news'}
           />
         </main>

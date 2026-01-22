@@ -34,9 +34,7 @@ interface ErrorBoundaryState {
 }
 
 // Using Component explicitly to ensure types are resolved correctly
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  // Removed explicit state declaration to avoid conflict with React.Component
-
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {

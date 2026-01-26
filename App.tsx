@@ -11,6 +11,7 @@ import ScheduleDetail from './components/ScheduleDetail';
 import Footer from './components/Footer';
 import PolicyDetail from './components/PolicyDetail';
 import ElectionDetail from './components/ElectionDetail';
+import RepresentativeElectionDetail from './components/RepresentativeElectionDetail';
 import MemberDetail from './components/MemberDetail';
 import SecretDashboard from './components/SecretDashboard';
 import SecretArchive from './components/SecretArchive';
@@ -44,7 +45,7 @@ const getCookie = (name: string) => {
 };
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting' | 'heavy-snow'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'representative-election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting' | 'heavy-snow'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -178,6 +179,12 @@ function App() {
       // Check for Election Route
       if (hash === '#election') {
         setCurrentView('election');
+        return;
+      }
+
+      // Check for Representative Election Route
+      if (hash === '#/representative-election') {
+        setCurrentView('representative-election');
         return;
       }
 
@@ -416,6 +423,12 @@ function App() {
         <main>
           <HeavySnowNews 
              onBack={() => window.location.hash = '#news'}
+          />
+        </main>
+      ) : currentView === 'representative-election' ? (
+        <main>
+          <RepresentativeElectionDetail
+            onBack={() => window.location.hash = '#home'}
           />
         </main>
       ) : (

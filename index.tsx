@@ -34,9 +34,11 @@ interface ErrorBoundaryState {
 }
 
 // Using Component explicitly to ensure types are resolved correctly
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+// Fix: Changed React.Component to Component (named import) to properly inherit generics for state and props
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
+    // Fix: Properly initialize state on the component instance
     this.state = {
       hasError: false,
       error: null
@@ -52,6 +54,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 
   public render() {
+    // Fix: Properly access state on the component instance
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-stone-50 p-4">
@@ -64,6 +67,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
               ページを再読み込みしてください。
             </p>
             <div className="bg-stone-100 p-4 rounded-lg overflow-auto mb-6 text-xs font-mono text-red-500 max-h-40">
+              {/* Fix: Properly access error state from this.state */}
               {this.state.error?.message || "詳細なエラー情報はありません"}
             </div>
             <button 
@@ -77,6 +81,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       );
     }
 
+    // Fix: Properly access props from this.props
     return this.props.children;
   }
 }

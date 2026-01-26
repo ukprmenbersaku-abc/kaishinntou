@@ -14,6 +14,10 @@ const Hero: React.FC = () => {
     window.location.hash = '#election';
   };
 
+  const goToRepresentativeElectionInfo = () => {
+    window.location.hash = '#/representative-election';
+  };
+
   return (
     <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-stone-50 pt-20 pb-12">
       
@@ -26,13 +30,22 @@ const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Election Info Button */}
+          {/* New: Reiwa 8 Representative Election Button */}
+          <button 
+            onClick={goToRepresentativeElectionInfo}
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md transition-all duration-300 cursor-pointer relative z-20"
+          >
+            <span>令和8年度 筑摩野中学校 二学年代議員選挙</span>
+          </button>
+
+          {/* Commented out: Reiwa 9 Officer Election Button
           <button 
             onClick={goToElectionInfo}
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-brand-100 text-brand-700 text-sm font-bold mb-8 shadow-sm hover:bg-brand-50 hover:shadow-md hover:scale-105 transition-all duration-300 cursor-pointer relative z-20"
           >
             <span>令和9年度 筑摩野中学校 生徒会役員選挙</span>
           </button>
+          */}
           
           <h1 className="text-5xl md:text-7xl font-bold text-stone-900 mb-8 leading-tight tracking-tight">
             学校生活に、<br/>

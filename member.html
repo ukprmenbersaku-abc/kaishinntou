@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checking Access...</title>
+    <!-- Import same firebase config to check auth before showing anything -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAnj30NFfZ1_msQmb00mvpG3Mh-i7PgwkA",
+        authDomain: "userkunn-saku.firebaseapp.com",
+        projectId: "userkunn-saku",
+        storageBucket: "userkunn-saku.firebasestorage.app",
+        messagingSenderId: "767449501126",
+        appId: "1:767449501126:web:dc2664153de68f5842f6c7",
+        measurementId: "G-75W3RYLE8N"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // 認証成功 -> 公式サイト（トップ）へリダイレクト
+          // App.tsx がログイン状態を検知して専用情報を表示します
+          window.location.replace('/');
+        } else {
+          // 認証失敗 -> エラー表示
+          document.body.innerHTML = `
+            <div style="display:flex; height:100vh; justify-content:center; align-items:center; background-color:#fafaf9; font-family:sans-serif; color:#444;">
+                <div style="background:white; padding:40px; border-radius:20px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.05); max-width:400px;">
+                    <h1 style="color:#ef4444; margin-bottom:10px; font-size:24px;">⛔ Access Denied</h1>
+                    <p style="margin-bottom:20px; line-height:1.6;">
+                        このページは党員専用です。<br>
+                        ログインされていないためアクセスできません。
+                    </p>
+                    <a href="/" style="display:inline-block; background:#1c1917; color:white; text-decoration:none; padding:10px 20px; border-radius:50px; font-weight:bold;">公式サイトに戻る</a>
+                </div>
+            </div>
+          `;
+          document.body.style.display = 'block';
+        }
+      });
+    </script>
+    <style>
+        /* 初期状態は非表示（チラつき防止） */
+        body { display: none; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Content injected by JS -->
+  </body>
+</html>

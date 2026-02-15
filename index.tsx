@@ -36,16 +36,12 @@ interface ErrorBoundaryState {
 /**
  * ErrorBoundary class to catch rendering errors and display a fallback UI.
  */
-// Fix: Extending 'Component' from the named import instead of 'React.Component' to ensure 'props' and 'state' are correctly recognized by the compiler.
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+// Fix: Explicitly extending 'React.Component' to ensure 'props' and 'state' are correctly inherited and recognized by the TypeScript compiler, resolving the error on line 85.
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   public state: ErrorBoundaryState = {
     hasError: false,
     error: null
   };
-
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-  }
 
   public static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
@@ -81,7 +77,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       );
     }
 
-    // Fix: Accessing 'props.children' from the extended 'Component' class
+    // Accessing 'props.children' from the correctly typed React.Component class
     return this.props.children;
   }
 }

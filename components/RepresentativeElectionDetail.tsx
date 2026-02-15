@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { 
   ArrowLeft, Calendar, ShieldCheck, Star, Trophy, Lightbulb, 
   Rocket, User, BadgeCheck, Mic, Bell, Target, Trash2, 
-  ChevronRight, ArrowRight, AlertCircle, Sparkles, Home
+  ChevronRight, ArrowRight, AlertCircle, Sparkles, Home,
+  Ear, GraduationCap, Heart, CheckCircle
 } from 'lucide-react';
 
 interface RepresentativeElectionDetailProps {
@@ -21,35 +22,35 @@ interface RepPolicy {
 const repPolicies: RepPolicy[] = [
   {
     id: 'rep-p1',
-    title: '聴く学校の実現',
-    icon: Mic,
-    desc: '皆さんの「本音」を形にする。',
-    detail: '代議員は学級の代表です。しかし、これまでは一部の声しか届いていませんでした。デジタル目安箱の設置や、定期的な「昼休み対話会」を実施し、誰でも匿名で、あるいは直接意見を言える環境を整えます。',
-    points: ['デジタル目安箱の運用開始', '学級内の意見集約プロセスの透明化', '代議員による全生徒への定期ヒアリング']
+    title: '聴く学校の早期実現',
+    icon: Ear,
+    desc: '「デリバリースマイル」に賛同。みんなの声を力に。',
+    detail: '生徒会長が進める「デリバリースマイル」に全面的に賛成します。各委員会で誰でも質問、意見、要望ができる体制を整え、一方通行ではない、みんなで作り上げる学校を目指します。',
+    points: ['生徒会「デリバリースマイル」への全面協力', '各委員会への意見収集・要望窓口の設置', '代議員による学級内ヒアリングの定例化']
   },
   {
     id: 'rep-p2',
-    title: '清掃は全集中。',
-    icon: Trash2,
-    desc: '環境が心を作り、学びを深める。',
-    detail: '清掃の時間は、ただの作業ではありません。自分たちの学び舎を整える大切な時間です。効率的な清掃用具の導入を提案し、短時間でも「全集中」で取り組める仕組みを構築。清掃後の達成感を学年全体で共有します。',
-    points: ['清掃道具の効率的なメンテナンス', '音楽を活用した「集中タイム」の導入', '美化コンクールの再定義と表彰制度']
+    title: '授業態度を良くし、成績向上',
+    icon: GraduationCap,
+    desc: '「全集中タイム」でメリハリのあるクラス作り。',
+    detail: '授業開始からの5分間を「全集中タイム」と位置づけます。私語ゼロで集中することで、学習のメリハリを生み出します。また、定期的に授業態度に関する意見交換会を実施し、良い点は継続、悪い点は改善する向上心のあるクラスを作ります。',
+    points: ['授業開始5分間の「全集中タイム（私語0）」の導入', '定期的な「授業態度意見交換会」の開催', 'クラス全体の成績向上に向けた環境整備']
   },
   {
     id: 'rep-p3',
-    title: '不透明な校則の改革の検討',
-    icon: ShieldCheck,
-    desc: '「なぜ？」を放置しない。',
-    detail: '「昔からあるから」という理由だけで残っている、今の時代にそぐわない不透明な校則はありませんか？生徒会と連携し、まずは校則の「全件調査」を行い、生徒・保護者・先生の三者で議論する場を設けます。',
-    points: ['校則全件の公開とアンケート調査', '校則検討委員会の設置提案', '時代に合わせた柔軟な運用ルールの模索']
+    title: 'いじめのない、快適なクラスへ',
+    icon: Heart,
+    desc: '暴言・暴力は「ダサい」。素直に謝れる環境。',
+    detail: '暴言や暴力が「ダサいこと」だという共通認識を育てます。間違いを認めて「ごめんなさい」と素直に言える温かい環境を構築します。特に筑輪祭（体育祭）などの行事では、ミスを責める「責め」をゼロにします。',
+    points: ['暴言・暴力が「カッコ悪い」という意識の醸成', '「ごめんなさい」と言い合えるクラス文化の構築', '筑輪祭（体育祭）での「責め」0運動の展開']
   },
   {
     id: 'rep-p4',
-    title: 'いった公約は必ず実現させる。',
-    icon: Target,
-    desc: '政治の基本は、信頼。',
-    detail: '「選挙の時だけいいことを言う」のはもう終わりにしましょう。掲げた公約がどこまで進んでいるか、なぜ遅れているのかを毎月「見える化」して報告します。皆さんと約束したことは、任期中に必ず形にします。',
-    points: ['公約進捗状況の掲示板・HP公開', '未達成事項に対する改善策の提示', '誠実な報告とフィードバックの徹底']
+    title: '「信頼できる生徒会」へ',
+    icon: CheckCircle,
+    desc: '「どうせやらない」を代議員会からゼロにする。',
+    detail: '「選挙の時だけいいことを言う」というイメージを払拭します。定期的に公約の進捗状況を報告し、一つ一つの約束を確実に実行していきます。誠実な報告と行動で、生徒会・代議員会への信頼を取り戻します。',
+    points: ['公約進捗状況の定期的・詳細な報告', '「有言実行」をスローガンにした誠実な活動', '全校生徒への透明性の高い情報公開']
   }
 ];
 
@@ -133,15 +134,15 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
           </div>
 
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-black text-white mb-8 leading-[1.0] tracking-tighter">
-            <span className="block mb-2 md:mb-4">本気の改革、</span>
+            <span className="block mb-2 md:mb-4">有言実行、</span>
             <span className="text-brand-400">
-              公約を必ず実現。
+              学校を変える。
             </span>
           </h1>
 
           <p className="text-lg md:text-2xl text-stone-400 font-medium max-w-3xl leading-relaxed mb-12">
             第97回 二学年代議員選挙。<br className="hidden md:block" />
-            言葉だけでなく、実行力で学校を変える。
+            「どうせ変わらない」を、私たちの行動で終わらせる。
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -187,10 +188,10 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
             {/* Info Side */}
             <div className="lg:w-2/3 p-10 md:p-14 lg:p-16 flex flex-col justify-center">
               <div className="mb-10">
-                 <h3 className="text-brand-600 font-black tracking-[0.3em] uppercase text-xs mb-4">The 4 Pillars</h3>
+                 <h3 className="text-brand-600 font-black tracking-[0.3em] uppercase text-xs mb-4">4 Essential Vows</h3>
                  <h4 className="text-4xl md:text-5xl font-black text-stone-900 tracking-tighter leading-[1.1]">
-                   二学年の未来を、<br/>
-                   <span className="text-stone-400 italic font-sans">言葉ではなく行動で。</span>
+                   学級の未来を、<br/>
+                   <span className="text-stone-400 italic font-sans">有言実行の力で。</span>
                  </h4>
               </div>
               

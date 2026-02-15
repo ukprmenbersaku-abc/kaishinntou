@@ -145,31 +145,21 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="bg-stone-800/80 border border-stone-700 px-8 py-5 rounded-2xl flex items-center gap-4 shadow-2xl">
-              <Calendar className="text-brand-400" size={28} />
-              <div className="text-left">
-                <span className="block text-[10px] text-stone-500 font-bold uppercase tracking-widest mb-1">Schedule</span>
-                <span className="text-lg font-black text-white">4月7日(予定) 投開票</span>
+            <div className="bg-stone-800/80 border border-stone-700 px-10 py-6 rounded-2xl flex items-center gap-5 shadow-2xl">
+              <div className="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-white">
+                <BadgeCheck size={28} />
               </div>
-            </div>
-            <div className="bg-stone-800/80 border border-stone-700 px-8 py-5 rounded-2xl flex items-center gap-4 shadow-2xl">
-              <Target className="text-teal-400" size={28} />
               <div className="text-left">
-                <span className="block text-[10px] text-stone-500 font-bold uppercase tracking-widest mb-1">Announcement</span>
-                <span className="text-lg font-black text-white">3月22日 告示</span>
+                <span className="block text-[10px] text-stone-500 font-bold uppercase tracking-[0.2em] mb-1">Official Candidate</span>
+                <span className="text-2xl font-black text-white tracking-wider">代表 岩本</span>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-stone-600">
-          <span className="text-[10px] font-black tracking-widest">SCROLL TO DETAILS</span>
-          <div className="w-px h-10 bg-gradient-to-b from-stone-600 to-transparent"></div>
-        </div>
       </section>
 
       {/* --- OFFICIAL CANDIDATE SECTION --- */}
-      <section className="relative min-h-[100svh] flex items-center justify-center py-20 bg-stone-900">
+      <section className="relative min-h-[100svh] flex items-center justify-center py-20 bg-stone-900 font-sans">
         <div className="max-w-6xl mx-auto px-4 w-full">
           <div className="w-full bg-white rounded-[3rem] shadow-[0_0_80px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col lg:flex-row min-h-[80vh]">
             
@@ -185,8 +175,8 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
                 </div>
               </div>
               <div className="text-center">
-                <h2 className="text-5xl font-black text-stone-900 mb-2 tracking-tighter">岩本 宗祐</h2>
-                <p className="text-stone-400 font-bold text-sm tracking-widest mb-6">IWAMOTO SOSUKE</p>
+                <h2 className="text-5xl font-black text-stone-900 mb-2 tracking-tighter">代表 岩本</h2>
+                <p className="text-stone-400 font-bold text-sm tracking-widest mb-6 uppercase">REPRESENTATIVE IWAMOTO</p>
                 <div className="flex flex-wrap justify-center gap-2">
                    <span className="bg-stone-900 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">公認候補者</span>
                    <span className="bg-brand-50 text-brand-600 px-4 py-2 rounded-xl text-[10px] font-black border border-brand-100">二学年選挙区</span>
@@ -200,7 +190,7 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
                  <h3 className="text-brand-600 font-black tracking-[0.3em] uppercase text-xs mb-4">The 4 Pillars</h3>
                  <h4 className="text-4xl md:text-5xl font-black text-stone-900 tracking-tighter leading-[1.1]">
                    二学年の未来を、<br/>
-                   <span className="text-stone-400 italic font-serif">言葉ではなく行動で。</span>
+                   <span className="text-stone-400 italic font-sans">言葉ではなく行動で。</span>
                  </h4>
               </div>
               
@@ -251,9 +241,9 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="group relative">
                 <div className="bg-stone-50 p-10 rounded-[2.5rem] border border-stone-100 group-hover:border-brand-400 group-hover:bg-white transition-all text-center">
-                  <div className="text-brand-600 font-black text-3xl mb-4 italic tracking-widest">3月22日</div>
+                  <div className="text-brand-600 font-black text-3xl mb-4 italic tracking-widest">未定</div>
                   <h4 className="text-xl font-black text-stone-900 mb-3">告示</h4>
-                  <p className="text-sm text-stone-500 font-bold">選挙期間の正式な始まり。私たちの覚悟を全校に示します。</p>
+                  <p className="text-sm text-stone-500 font-bold">選挙期間の正式な始まり。決まり次第お知らせします。</p>
                 </div>
                 <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-20 text-stone-200">
                   <ChevronRight size={32} />
@@ -262,21 +252,46 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
 
               <div className="group">
                 <div className="bg-brand-600 p-10 rounded-[2.5rem] border border-brand-500 shadow-2xl shadow-brand-200/50 text-center text-white">
-                  <div className="text-brand-200 font-black text-3xl mb-4 italic tracking-widest">4月7日(予定)</div>
+                  <div className="text-brand-200 font-black text-3xl mb-4 italic tracking-widest">未定</div>
                   <h4 className="text-xl font-black mb-3">投開票・選抜</h4>
-                  <p className="text-sm text-brand-100 font-bold opacity-90">学級の未来が決まる運命の日。一票一票に誠実に向き合います。</p>
+                  <p className="text-sm text-brand-100 font-bold opacity-90">学級の未来が決まる運命の日。誠実に準備を進めています。</p>
                 </div>
               </div>
             </div>
 
             <p className="text-stone-400 text-[10px] font-black tracking-widest uppercase">
-              ※ 詳細な日程、掲示期間、選抜プロセスは学校の規定に基づき、適宜更新されます。
+              ※ 詳細な日程、掲示期間、選抜プロセスは学校の規定に基づき、決定次第更新されます。
             </p>
           </div>
         </div>
       </section>
 
-      {/* --- RETURN TO MAIN SITE BUTTON (EMBEDDED) --- */}
+      {/* --- MESSAGE SECTION --- */}
+      <section className="py-32 bg-stone-900 text-white relative">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="flex items-center gap-6 mb-12">
+            <div className="w-20 h-1.5 bg-brand-500 rounded-full"></div>
+            <h2 className="text-brand-400 font-black tracking-[0.3em] text-xs uppercase">Message from Party Leader</h2>
+          </div>
+          <blockquote className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.6] mb-16 tracking-tighter">
+            「代議員会を、<br/>
+            皆さんの意志が学校を動かす<br/>
+            <span className="text-brand-500 underline decoration-8 underline-offset-[12px]">最強のエンジン</span>に変えます。」
+          </blockquote>
+          <p className="text-stone-400 text-xl leading-relaxed mb-16 font-bold max-w-2xl">
+            代議員はただの係ではありません。皆さんの「もっとこうしてほしい」という願いを、具体的な施策に変えて学校に届ける責任者です。私は、この4つの公約を武器に、誰よりも誠実に、そして熱く、二学年、そして筑摩野中の未来を切り拓きます。
+          </p>
+          <div className="flex items-center gap-8 p-10 bg-white/5 rounded-[3rem] border border-white/10 w-fit backdrop-blur-sm group hover:bg-white/10 transition-all">
+            <div className="w-20 h-20 bg-brand-600 rounded-[1.5rem] flex items-center justify-center font-black text-3xl shadow-2xl group-hover:scale-110 transition-transform">岩</div>
+            <div>
+              <p className="text-2xl font-black mb-1">代表 岩本</p>
+              <p className="text-xs text-stone-500 font-black uppercase tracking-[0.4em]">Leader of Chikumano Kaishin</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- RETURN TO MAIN SITE BUTTON --- */}
       <section className="py-24 bg-stone-900 flex flex-col items-center">
         <div className="max-w-xl w-full px-4">
           <button 
@@ -296,9 +311,6 @@ const RepresentativeElectionDetail: React.FC<RepresentativeElectionDetailProps> 
               <ArrowLeft size={24} />
             </div>
           </button>
-          <p className="mt-8 text-center text-stone-600 text-[10px] font-bold tracking-[0.2em] uppercase">
-            Thank you for visiting the special election feature.
-          </p>
         </div>
       </section>
 

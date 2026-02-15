@@ -34,17 +34,17 @@ interface ErrorBoundaryState {
 }
 
 /**
- * Using React.Component explicitly ensures TypeScript 
- * correctly recognizes inherited properties like 'props' and 'state'.
+ * ErrorBoundary class to catch rendering errors and display a fallback UI.
  */
-// Fix: Use React.Component and initialize state in constructor to resolve inheritance property recognition issues.
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+// Fix: Extending 'Component' from the named import instead of 'React.Component' to ensure 'props' and 'state' are correctly recognized by the compiler.
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  public state: ErrorBoundaryState = {
+    hasError: false,
+    error: null
+  };
+
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = {
-      hasError: false,
-      error: null
-    };
   }
 
   public static getDerivedStateFromError(error: Error): ErrorBoundaryState {
@@ -56,7 +56,6 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 
   public render() {
-    // Correctly accessing state from this.state as recognized by the Component base class.
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-stone-50 p-4">
@@ -69,7 +68,6 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
               ページを再読み込みしてください。
             </p>
             <div className="bg-stone-100 p-4 rounded-lg overflow-auto mb-6 text-xs font-mono text-red-500 max-h-40">
-              {/* Accessing error message safely from the state */}
               {this.state.error?.message || "詳細なエラー情報はありません"}
             </div>
             <button 
@@ -83,7 +81,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       );
     }
 
-    // Returning children from this.props as recognized by the Component base class.
+    // Fix: Accessing 'props.children' from the extended 'Component' class
     return this.props.children;
   }
 }

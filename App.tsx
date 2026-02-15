@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -6,6 +7,7 @@ import NewsArchive from './components/NewsArchive';
 import Manifesto from './components/Manifesto';
 import Members from './components/Members';
 import AllMembers from './components/AllMembers';
+import RecommendedApps from './components/RecommendedApps';
 import Schedule from './components/Schedule';
 import ScheduleDetail from './components/ScheduleDetail';
 import Footer from './components/Footer';
@@ -25,6 +27,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import ChatReleaseNews from './components/ChatReleaseNews';
 import OnlineMeetingNews from './components/OnlineMeetingNews';
 import HeavySnowNews from './components/HeavySnowNews';
+import MatsumotoMeetingNews from './components/MatsumotoMeetingNews';
 import { policies } from './data/policies';
 import { members } from './data/members';
 import { Policy, Member } from './types';
@@ -45,7 +48,7 @@ const getCookie = (name: string) => {
 };
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'representative-election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting' | 'heavy-snow'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'policy' | 'election' | 'representative-election' | 'member' | 'all-members' | 'schedule' | 'secret-archive' | 'secret-meeting' | 'summary' | 'news-archive' | 'news-personnel-change' | 'new-year-greeting' | 'countdown-notice' | 'privacy-policy' | 'chat-release' | 'online-meeting' | 'heavy-snow' | 'matsumoto-meeting'>('main');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   
@@ -157,6 +160,12 @@ function App() {
       // Check for Heavy Snow News Route
       if (hash === '#/news/heavy-snow') {
         setCurrentView('heavy-snow');
+        return;
+      }
+
+      // Check for Matsumoto Meeting News Route
+      if (hash === '#/news/matsumoto-meeting') {
+        setCurrentView('matsumoto-meeting');
         return;
       }
 
@@ -307,6 +316,7 @@ function App() {
           <News />
           <Manifesto />
           <Members />
+          <RecommendedApps />
           <Schedule />
           <section id="support" className="py-24 bg-brand-900 text-white relative overflow-hidden">
                <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
@@ -422,6 +432,12 @@ function App() {
       ) : currentView === 'heavy-snow' ? (
         <main>
           <HeavySnowNews 
+             onBack={() => window.location.hash = '#news'}
+          />
+        </main>
+      ) : currentView === 'matsumoto-meeting' ? (
+        <main>
+          <MatsumotoMeetingNews 
              onBack={() => window.location.hash = '#news'}
           />
         </main>

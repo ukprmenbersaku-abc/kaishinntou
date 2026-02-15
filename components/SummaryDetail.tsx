@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { ArrowLeft, Quote, Calendar, User, Mic } from 'lucide-react';
 
@@ -45,7 +46,7 @@ const SummaryDetail: React.FC<SummaryDetailProps> = ({ onBack }) => {
             <div className="flex items-center gap-2 border-l-2 border-brand-200 pl-4">
               <div>
                 <p className="text-sm font-bold text-stone-500 uppercase tracking-wider">筑摩野改新党 代表</p>
-                <p className="text-xl font-bold text-stone-800">岩本 宗祐</p>
+                <p className="text-xl font-bold text-stone-800">代表 岩本</p>
               </div>
             </div>
           </div>
@@ -59,7 +60,7 @@ const SummaryDetail: React.FC<SummaryDetailProps> = ({ onBack }) => {
               はじめに
             </h2>
             <p className="text-lg text-stone-700 leading-loose mb-6">
-              皆さん、こんにちは。筑摩野改新党代表の岩本です。<br/>
+              皆さん、こんにちは。筑摩野改新党の代表 岩本です。<br/>
               早いもので、私たちが「学校を変えたい」と声を上げてから数ヶ月が経ちました。この12月という節目に、改めて今年度の活動を振り返り、私の想いをお伝えしたいと思います。
             </p>
           </section>
@@ -87,6 +88,7 @@ const SummaryDetail: React.FC<SummaryDetailProps> = ({ onBack }) => {
             </p>
           </section>
 
+          {/* Fix: Changed closing </div> to </section> to match opening <section> tag */}
           <section className="text-center pt-8 border-t border-stone-100">
             <p className="text-2xl font-bold text-stone-800 mb-4">
               「新しい選択肢」を、共に選びましょう。
@@ -95,7 +97,6 @@ const SummaryDetail: React.FC<SummaryDetailProps> = ({ onBack }) => {
               引き続き、筑摩野改新党へのご理解とご協力を心よりお願い申し上げます。
             </p>
           </section>
-
         </div>
 
         {/* Footer Actions */}

@@ -1,4 +1,5 @@
-import { CalendarClock, Mic, Bell, Info, UserCog, Clock, Sparkles, Sun, MessageSquare, Video, CloudSnow, Snowflake } from 'lucide-react';
+
+import { CalendarClock, Mic, Bell, Info, UserCog, Clock, Sparkles, Sun, MessageSquare, Video, CloudSnow, Snowflake, ExternalLink } from 'lucide-react';
 import React from 'react';
 
 export interface NewsItem {
@@ -11,6 +12,14 @@ export interface NewsItem {
 }
 
 export const newsData: NewsItem[] = [
+  {
+    id: 'n_matsumoto_meeting',
+    date: '2026.01.25',
+    category: '活動報告',
+    title: '代表 岩本が松本市「多事総論会」に出席しました',
+    link: '#/news/matsumoto-meeting',
+    icon: ExternalLink
+  },
   {
     id: 'n_snow_update',
     date: '2026.01.22',

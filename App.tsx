@@ -313,10 +313,10 @@ function App() {
       {currentView === 'main' ? (
         <main>
           <Hero />
+          <RecommendedApps />
           <News />
           <Manifesto />
           <Members />
-          <RecommendedApps />
           <Schedule />
           <section id="support" className="py-24 bg-brand-900 text-white relative overflow-hidden">
                <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>

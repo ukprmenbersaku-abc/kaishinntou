@@ -97,8 +97,8 @@ const ChatReleaseNews: React.FC<ChatReleaseNewsProps> = ({ onBack }) => {
                                 <strong>「自分の名前（苗字英語小文字）@chikushin.com」</strong> の形式にしてください。
                             </p>
                             <div className="bg-stone-100 p-3 rounded-lg text-sm font-mono text-stone-700">
-                                <span className="text-stone-400">例：岩本宗祐の場合</span><br/>
-                                <span className="font-bold text-blue-600">iwamoto@chikushin.com</span>
+                                <span className="text-stone-400">例：山田太郎の場合</span><br/>
+                                <span className="font-bold text-blue-600">yamada@chikushin.com</span>
                             </div>
                         </div>
                     </div>
